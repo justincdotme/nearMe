@@ -1,0 +1,23 @@
+{
+  "name": "nearMe",
+  "version": "1.0.0",
+  "description": "An application for finding nearby EV Charging Stations.  The application uses the HTML5 Geolocation API and the Open Charge Map API to determine the users location. After the location is determined, the application will display a list of charging stations in the user's geographic area.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/justincdotme/findMyIsp.git"
+  },
+  "keywords": [],
+  "author": "Justin hristenson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/justincdotme/nearMe/issues"
+  },
+  "homepage": "https://github.com/justincdotme/nearMe#readme",
+  "devDependencies": {
+    "webpack": "^1.14.0"
+  }
+}

@@ -1,0 +1,24 @@
+{
+    "name": "justincdotme/nearMe",
+    "description": "EV Charging Station Locator",
+    "require": {
+        "php": ">=5.5.9",
+	    "guzzlehttp/guzzle": "~6.0",
+        "pimple/pimple": "~3.0",
+        "facebook/graph-sdk": "^5.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0"
+    },
+    "authors": [
+        {
+            "name": "Justin Christenson",
+            "email": "info@justinc.me"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+          "nearMe\\": "src"
+        }
+    }
+}
