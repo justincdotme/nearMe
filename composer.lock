@@ -1353,16 +1353,16 @@
         },
         {
             "name": "laravel/lumen-framework",
-            "version": "v5.4.2",
+            "version": "v5.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/lumen-framework.git",
-                "reference": "834c7f64dc7ee105a80c4bceabfb50496465ef23"
+                "reference": "3f51ecf642e908e8a26c32e102f636c111e1e53a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/lumen-framework/zipball/834c7f64dc7ee105a80c4bceabfb50496465ef23",
-                "reference": "834c7f64dc7ee105a80c4bceabfb50496465ef23",
+                "url": "https://api.github.com/repos/laravel/lumen-framework/zipball/3f51ecf642e908e8a26c32e102f636c111e1e53a",
+                "reference": "3f51ecf642e908e8a26c32e102f636c111e1e53a",
                 "shasum": ""
             },
             "require": {
@@ -1396,7 +1396,7 @@
             },
             "require-dev": {
                 "mockery/mockery": "~0.9",
-                "phpunit/phpunit": "~5.0"
+                "phpunit/phpunit": "~5.7"
             },
             "suggest": {
                 "vlucas/phpdotenv": "Required to use .env files (~2.2)."
@@ -1432,7 +1432,7 @@
                 "laravel",
                 "lumen"
             ],
-            "time": "2017-02-04 15:38:14"
+            "time": "2017-02-04 20:28:26"
         },
         {
             "name": "monolog/monolog",
