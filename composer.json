@@ -1,9 +1,15 @@
 {
-    "name": "laravel/lumen",
-    "description": "The Laravel Lumen Framework.",
-    "keywords": ["framework", "laravel", "lumen"],
+    "name": "justincdotme/nearMe",
+    "description": "EV Charging Station Locator built on Lumen",
+    "keywords": ["open charge", "ev", "location", "charging", "map"],
     "license": "MIT",
     "type": "project",
+    "authors": [
+        {
+            "name": "Justin Christenson",
+            "email": "info@justinc.me"
+        }
+    ],
     "require": {
         "php": ">=5.6.4",
         "laravel/lumen-framework": "5.4.*",
