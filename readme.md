@@ -1,54 +1,21 @@
-# nearMe v1.0
-  An application for finding nearby EV Charging Stations.  
-  The application uses the HTML5 Geolocation API and the Open Charge Map API to determine the users location. 
-  After the location is determined, the application will display a list of charging stations in the user's geographic area.
+# Lumen PHP Framework
 
- **View Demo**
- [http://nearMe.demos.justinc.me](http://nearme.demos.justinc.me/)
+[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
+[![Total Downloads](https://poser.pugx.org/laravel/lumen-framework/d/total.svg)](https://packagist.org/packages/laravel/lumen-framework)
+[![Latest Stable Version](https://poser.pugx.org/laravel/lumen-framework/v/stable.svg)](https://packagist.org/packages/laravel/lumen-framework)
+[![Latest Unstable Version](https://poser.pugx.org/laravel/lumen-framework/v/unstable.svg)](https://packagist.org/packages/laravel/lumen-framework)
+[![License](https://poser.pugx.org/laravel/lumen-framework/license.svg)](https://packagist.org/packages/laravel/lumen-framework)
 
+Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
 
-## Requirements
- - This application requires Composer, located at [getcomposer.org](https://getcomposer.org/)
- - This application requires Webpack, located at [http://webpack.github.io/](http://webpack.github.io/)
+## Official Documentation
 
-## Installation
+Documentation for the framework can be found on the [Lumen website](http://lumen.laravel.com/docs).
 
- Clone the repository, then install dependencies using Composer.
- 
-    git clone https://github.com/justincdotme/nearMe.git
+## Security Vulnerabilities
 
-    composer install
-    
- Install NPM dependencies.
-    
-    npm install
-    
-        
-
-## Credits
-
- -  [Open Charge Maps](http://openchargemap.org/site/develop).
+If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
 
 ## License
 
- The MIT License (MIT)
- 
- Copyright (c) 2016 Justin Christenson
- 
- Permission is hereby granted, free of charge, to any person obtaining a copy
- of this software and associated documentation files (the "Software"), to deal
- in the Software without restriction, including without limitation the rights
- to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the Software is
- furnished to do so, subject to the following conditions:
- 
- The above copyright notice and this permission notice shall be included in
- all copies or substantial portions of the Software.
- 
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- THE SOFTWARE.
+The Lumen framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
