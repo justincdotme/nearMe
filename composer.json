@@ -14,7 +14,8 @@
         "php": ">=5.6.4",
         "laravel/lumen-framework": "5.4.*",
         "vlucas/phpdotenv": "~2.2",
-        "jcf/geocode": "1.2.*"
+        "jcf/geocode": "1.2.*",
+        "justincdotme/laravel-open-charge": "^1.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
