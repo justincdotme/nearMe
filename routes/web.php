@@ -1,11 +1,11 @@
 <?php
 
 $app->post('address',[
-    'as' => 'pages.home',
-    'uses' => 'LocationController@address'
+    'as' => 'stations.address',
+    'uses' => 'StationController@searchByAddress'
 ]);
 
-$app->post('coords/{lat}/{lng}',[
-    'as' => 'pages.home',
-    'uses' => 'LocationController@coords'
+$app->post('coords',[
+    'as' => 'stations.coords',
+    'uses' => 'StationController@searchByCoords'
 ]);
