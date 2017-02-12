@@ -1,5 +1,13 @@
 /vendor/
 /.idea/
+!/public/assets/js/dist/.gitignore
+/public/assets/js/dist/
+!/public/assets/css/dist/.gitignore
+/public/assets/css/dist/
+!public/assets/images/.gitignore
+public/assets/images/
+.eslintrc.json
+.jshintrc
 Homestead.json
 Homestead.yaml
 .env
