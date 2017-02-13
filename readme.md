@@ -3,10 +3,6 @@
   The application uses the HTML5 Geolocation API and the Open Charge Map API to determine the users location. 
   After the location is determined, the application will display a list of charging stations in the user's geographic area.
 
- **View Demo**
- [http://nearMe.demos.justinc.me](http://nearme.demos.justinc.me/)
-
-
 ## Requirements
  - This application requires Composer, located at [getcomposer.org](https://getcomposer.org/)
  - This application requires NPM, located at [https://www.npmjs.com/](https://www.npmjs.com/)
