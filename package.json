@@ -7,10 +7,8 @@
     "test": "tests"
   },
   "scripts": {
-    "build": "webpack",
-    "build-watch": "webpack --watch",
-    "dev": "export NODE_ENV=development && webpack --hide-modules",
-    "production": "export NODE_ENV=production && webpack --hide-modules"
+    "build-dev": "export NODE_ENV=development && webpack --hide-modules --watch",
+    "build-production": "export NODE_ENV=production && webpack --hide-modules"
   },
   "repository": {
     "type": "git",
