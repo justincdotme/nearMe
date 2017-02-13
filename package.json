@@ -7,7 +7,10 @@
     "test": "tests"
   },
   "scripts": {
-    "build": "webpack"
+    "build": "webpack",
+    "build-watch": "webpack --watch",
+    "dev": "export NODE_ENV=development && webpack --hide-modules",
+    "production": "export NODE_ENV=production && webpack --hide-modules"
   },
   "repository": {
     "type": "git",
@@ -28,11 +31,16 @@
     "css-loader": "^0.26.1",
     "eslint": "^3.15.0",
     "extract-text-webpack-plugin": "^2.0.0-rc.3",
+    "html5shiv": "^3.7.3",
     "node-sass": "^4.5.0",
+    "optimize-css-assets-webpack-plugin": "^1.3.0",
     "path": "^0.12.7",
     "sass-loader": "^5.0.1",
     "scss-loader": "0.0.1",
     "style-loader": "^0.13.1",
+    "vue": "^2.1.10",
+    "vue-loader": "^10.3.0",
+    "vue-template-compiler": "^2.1.0",
     "webpack": "^2.2.1"
   }
 }
