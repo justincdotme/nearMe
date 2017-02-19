@@ -11,18 +11,12 @@ class StationController extends Controller
 {
     protected $locationService;
     protected $request;
-    protected $filters;
 
     public function __construct(LocationServiceInterface $locationService, Request $request)
     {
         $this->locationService = $locationService;
         $this->request = $request;
 
-        $this->filters = [
-            //TODO - Set a hard high limit (likely 25, default to something digestable like 10 (multiples of 2)
-            'maxresults' => $this->request->input('limit'),
-            'distance' => $this->request->input('distance')
-        ];
     }
 
     /**
@@ -113,7 +107,10 @@ class StationController extends Controller
     {
         $results = OpenCharge::latitude($lat)
             ->longitude($lng)
-            ->filters($this->filters)
+            ->filters([
+                'maxresults' => $this->request->has('limit') ? $this->request->input('limit') : 10,
+                'distance' => $this->request->has('distance') ? $this->request->input('distance') : 5
+            ])
             ->get();
 
         $filteredResults = [];
