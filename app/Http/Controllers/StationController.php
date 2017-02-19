@@ -17,7 +17,9 @@ class StationController extends Controller
     {
         $this->locationService = $locationService;
         $this->request = $request;
+
         $this->filters = [
+            //TODO - Set a hard high limit (likely 25, default to something digestable like 10 (multiples of 2)
             'maxresults' => $this->request->input('limit'),
             'distance' => $this->request->input('distance')
         ];
@@ -45,17 +47,16 @@ class StationController extends Controller
 
         $coords = $this->locationService->byAddress($this->request->address);
         if (!$coords->isEmpty()) {
-            $stationList = OpenCharge::latitude($coords->get('lat'))
-                ->longitude($coords->get('lng'))
-                ->filters($this->filters)
-                ->get();
-
             return response()->json([
                 'status' => 'success',
-                'list' => $stationList,
+                'list' => $this->getList(
+                    $coords->get('lat'),
+                    $coords->get('lng')
+                ),
                 'coords' => $coords
             ]);
         }
+
         return response()->json([
             'status' => 'error',
             'errors' => [
@@ -96,8 +97,79 @@ class StationController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'list' => OpenCharge::latitude($lat)->longitude($lng)->filters($this->filters)->get(),
+            'list' => $this->getList($lat, $lng),
             'address' => $this->locationService->byCoordinates($lat, $lng)->get('address')
         ]);
+    }
+
+    /**
+     * Remove unnecessary data from station list.
+     *
+     * @param $lat string latitude
+     * @param $lng string longitude
+     * @return array
+     */
+    protected function getList($lat, $lng)
+    {
+        $results = OpenCharge::latitude($lat)
+            ->longitude($lng)
+            ->filters($this->filters)
+            ->get();
+
+        $filteredResults = [];
+
+        $results->each(function ($item, $key) use (&$filteredResults) {
+            $operatorInfo = $item->OperatorInfo;
+            $addressInfo = $item->AddressInfo;
+            $connection = $item->Connections[0];
+
+            $filteredResults[$key] = [
+                'operator' => [
+                    'name' => (isset($operatorInfo->Title) ? $operatorInfo->Title : null),
+                    'website' => (isset($operatorInfo->WebsiteURL) ? $operatorInfo->WebsiteURL : null),
+                    'phone' => (isset($operatorInfo->PhonePrimaryContact) ? $operatorInfo->PhonePrimaryContact : null),
+                    'email' => (isset($operatorInfo->ContactEmail) ? $operatorInfo->ContactEmail : null)
+                ],
+                'location' => [
+                    'street_address' => [
+                        'line_1' => (isset($addressInfo->AddressLine1) ? $addressInfo->AddressLine1 : null),
+                        'line_2' => (isset($addressInfo->AddressLine2) ? $addressInfo->AddressLine2 : null),
+                        'city' => (isset($addressInfo->Town) ? $addressInfo->Town : null),
+                        'state' => (isset($addressInfo->StateOrProvince) ? $addressInfo->StateOrProvince : null)
+                    ],
+                    'name' => (isset($addressInfo->Title) ? $addressInfo->Title : $addressInfo->AddressLine1),
+                    'distance' => (isset($addressInfo->Distance) ? $addressInfo->Distance : null),
+                    'lat' => (isset($addressInfo->Latitude) ? $addressInfo->Latitude : null),
+                    'lng' => (isset($addressInfo->Longitude) ? $addressInfo->Longitude : null),
+                    'connection' => [
+                        'level' => (isset($connection->Level->Title) ? $connection->Level->Title : null),
+                        'amperage' => (isset($connection->Amps) ? $connection->Amps : null),
+                        'voltage' => (isset($connection->Voltage) ? $connection->Voltage : null),
+                        'kilowatts' => (isset($connection->PowerKW) ? $connection->PowerKW : null),
+                        'fast_charge_capable' => (
+                        isset($connection->Level->isFastChargeCapable) ?
+                            $connection->Level->isFastChargeCapable :
+                            null
+                        )
+                    ]
+                ]
+            ];
+
+
+            $address = $filteredResults[$key]['location']['street_address'];
+
+            $googleAddressString = urlencode(
+                $address['line_1'] . $address['city'] . $address['state']
+            );
+            $filteredResults[$key]['google_map_link'] = "http://maps.google.com/?daddr={$googleAddressString}";
+
+            $appleAddressString = urlencode(
+                $address['line_1'] . ',' . $address['city'] . $address['state']
+            );
+            $filteredResults[$key]['apple_map_link'] = "http://maps.apple.com/?daddr={$appleAddressString}";
+
+        });
+
+        return $filteredResults;
     }
 }
