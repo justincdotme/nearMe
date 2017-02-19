@@ -7,9 +7,7 @@ class StationControllerTest extends TestCase
      */
     public function it_returns_correct_coordinates_for_address()
     {
-        $this->post('/address', [
-            'address' => '1 Letterman Dr, San Francisco, CA 94129, USA'
-        ])->seeJson([
+        $this->get('/address?address=' . urlencode("1 Letterman Dr, San Francisco, CA 94129, USA"))->seeJson([
             'status' => 'success',
             'coords' => [
                 'lat' => 37.7994535,
@@ -23,10 +21,7 @@ class StationControllerTest extends TestCase
      */
     public function it_returns_correct_address_for_coordinates()
     {
-        $this->post('/coords/', [
-            'lat' => 37.7994535,
-            'lng' => -122.4493776
-        ])->seeJson([
+        $this->get('/coords?lat=37.7994535&lng=-122.4493776')->seeJson([
             'status' => 'success',
             'address' => '1 Letterman Dr, San Francisco, CA 94129, USA'
         ]);

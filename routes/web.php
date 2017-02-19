@@ -1,11 +1,15 @@
 <?php
 
-$app->post('address',[
+$app->get('/', function () {
+    return view('home');
+});
+
+$app->get('address',[
     'as' => 'stations.address',
     'uses' => 'StationController@searchByAddress'
 ]);
 
-$app->post('coords',[
+$app->get('coords',[
     'as' => 'stations.coords',
     'uses' => 'StationController@searchByCoords'
 ]);

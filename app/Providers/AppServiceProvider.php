@@ -17,5 +17,10 @@ class AppServiceProvider extends ServiceProvider
             \App\Src\LocationServiceInterface::class,
             \App\Src\GoogleLocationService::class
         );
+
+        $this->app->bind(
+            \App\Src\ChargeStationListInterface::class,
+            \App\Src\OpenChargeListService::class
+        );
     }
 }
