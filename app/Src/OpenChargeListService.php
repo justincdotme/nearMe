@@ -14,70 +14,110 @@ class OpenChargeListService implements ChargeStationListInterface
         $this->listProvider = $listProvider;
     }
 
+    /**
+     * Get a list of charging locations.
+     * Filter out unused data.
+     *
+     * @param $lat float - lattitude
+     * @param $lng float - longitude
+     * @param $filters array - URL Filters
+     *
+     * @return array
+     */
     public function getList($lat, $lng, $filters)
     {
-        $results = $this->listProvider
+        //The array to return
+        $filteredResults = [];
+
+        //Get a list of stations and iterate over them
+        $this->listProvider
             ->latitude($lat)
             ->longitude($lng)
             ->filters([
                 'maxresults' => (null != $filters['maxresults'] ? $filters['maxresults'] : 10),
                 'distance' => (null != $filters['distance'] ? $filters['distance'] : 5)
             ])
-            ->get();
+            ->get()
+            ->each(function ($item, $key) use (&$filteredResults) {
 
-        $filteredResults = [];
+                $operatorInfo = $item->OperatorInfo;
+                $addressInfo = $item->AddressInfo;
+                $connections = $item->Connections;
 
-        $results->each(function ($item, $key) use (&$filteredResults) {
-            $operatorInfo = $item->OperatorInfo;
-            $addressInfo = $item->AddressInfo;
-            $connection = $item->Connections[0];
+                //1 location can (and usually do) have more than 1 charger
+                $levels = [];
+                $amperages = [];
+                $voltages = [];
+                $kilowatts = [];
+                $fastChargeCapable = false;
+                foreach ($connections as $connection) {
+                    if (!in_array($connection->Level->Title, $levels)) {
+                        $levels[] = [
+                            'id' => $connection->Level->ID,
+                            'title' => $connection->Level->Title
+                        ];
+                    }
+                    //Create a range of available amperage
+                    if (!in_array($connection->Amps, $amperages) && null != $connection->Amps) {
+                        $amperages[] = $connection->Amps;
+                    }
+                    //Create a range of available voltage
+                    if (!in_array($connection->Voltage, $voltages) && null != $connection->Voltage) {
+                        $voltages[] = $connection->Voltage;
+                    }
+                    //Create a range of available kilowatts
+                    if (!in_array($connection->PowerKW, $kilowatts) && null != $connection->PowerKW) {
+                        $kilowatts[] = $connection->PowerKW;
+                    }
 
-            $filteredResults[$key] = [
-                'operator' => [
-                    'name' => (isset($operatorInfo->Title) ? $operatorInfo->Title : null),
-                    'website' => (isset($operatorInfo->WebsiteURL) ? $operatorInfo->WebsiteURL : null),
-                    'phone' => (isset($operatorInfo->PhonePrimaryContact) ? $operatorInfo->PhonePrimaryContact : null),
-                    'email' => (isset($operatorInfo->ContactEmail) ? $operatorInfo->ContactEmail : null)
-                ],
-                'location' => [
-                    'street_address' => [
-                        'line_1' => (isset($addressInfo->AddressLine1) ? $addressInfo->AddressLine1 : null),
-                        'line_2' => (isset($addressInfo->AddressLine2) ? $addressInfo->AddressLine2 : null),
-                        'city' => (isset($addressInfo->Town) ? $addressInfo->Town : null),
-                        'state' => (isset($addressInfo->StateOrProvince) ? $addressInfo->StateOrProvince : null)
+                    if ($connection->Level->IsFastChargeCapable) {
+                        $fastChargeCapable = true;
+                    }
+                }
+
+
+                $filteredResults[$key] = [
+                    'operator' => [
+                        'name' => (isset($operatorInfo->Title) ? $operatorInfo->Title : null),
+                        'website' => (isset($operatorInfo->WebsiteURL) ? $operatorInfo->WebsiteURL : null),
+                        'phone' => (isset($operatorInfo->PhonePrimaryContact) ? $operatorInfo->PhonePrimaryContact : null),
+                        'email' => (isset($operatorInfo->ContactEmail) ? $operatorInfo->ContactEmail : null)
                     ],
-                    'name' => (isset($addressInfo->Title) ? $addressInfo->Title : $addressInfo->AddressLine1),
-                    'distance' => (isset($addressInfo->Distance) ? $addressInfo->Distance : null),
-                    'lat' => (isset($addressInfo->Latitude) ? $addressInfo->Latitude : null),
-                    'lng' => (isset($addressInfo->Longitude) ? $addressInfo->Longitude : null),
-                    'connection' => [
-                        'level' => (isset($connection->Level->Title) ? $connection->Level->Title : null),
-                        'amperage' => (isset($connection->Amps) ? $connection->Amps : null),
-                        'voltage' => (isset($connection->Voltage) ? $connection->Voltage : null),
-                        'kilowatts' => (isset($connection->PowerKW) ? $connection->PowerKW : null),
-                        'fast_charge_capable' => (
-                        isset($connection->Level->isFastChargeCapable) ?
-                            $connection->Level->isFastChargeCapable :
-                            null
-                        )
+                    'location' => [
+                        'street_address' => [
+                            'line_1' => (isset($addressInfo->AddressLine1) ? $addressInfo->AddressLine1 : null),
+                            'line_2' => (isset($addressInfo->AddressLine2) ? $addressInfo->AddressLine2 : null),
+                            'city' => (isset($addressInfo->Town) ? $addressInfo->Town : null),
+                            'state' => (isset($addressInfo->StateOrProvince) ? $addressInfo->StateOrProvince : null)
+                        ],
+                        'name' => (isset($addressInfo->Title) ? $addressInfo->Title : $addressInfo->AddressLine1),
+                        'distance' => (isset($addressInfo->Distance) ? $addressInfo->Distance : null),
+                        'lat' => (isset($addressInfo->Latitude) ? $addressInfo->Latitude : null),
+                        'lng' => (isset($addressInfo->Longitude) ? $addressInfo->Longitude : null),
+                        'connections' => [
+                            'levels' => $levels,
+                            'amperages' => $amperages,
+                            'voltages' => $voltages,
+                            'kilowatts' => $kilowatts,
+                            'fast_charge_capable' => $fastChargeCapable
+                        ]
                     ]
-                ]
-            ];
+                ];
 
 
-            $address = $filteredResults[$key]['location']['street_address'];
+                $address = $filteredResults[$key]['location']['street_address'];
 
-            $googleAddressString = urlencode(
-                $address['line_1'] . $address['city'] . $address['state']
-            );
-            $filteredResults[$key]['google_map_link'] = "http://maps.google.com/?daddr={$googleAddressString}";
+                $googleAddressString = urlencode(
+                    $address['line_1'] . $address['city'] . $address['state']
+                );
+                $filteredResults[$key]['google_map_link'] = "http://maps.google.com/?daddr={$googleAddressString}";
 
-            $appleAddressString = urlencode(
-                $address['line_1'] . ',' . $address['city'] . $address['state']
-            );
-            $filteredResults[$key]['apple_map_link'] = "http://maps.apple.com/?daddr={$appleAddressString}";
+                $appleAddressString = urlencode(
+                    $address['line_1'] . ',' . $address['city'] . $address['state']
+                );
+                $filteredResults[$key]['apple_map_link'] = "http://maps.apple.com/?daddr={$appleAddressString}";
 
-        });
+            });
 
         return $filteredResults;
     }
