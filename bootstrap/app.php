@@ -97,4 +97,7 @@ $app->group(['namespace' => 'App\Http\Controllers'], function ($app) {
     require __DIR__.'/../routes/web.php';
 });
 
+//Load up custom helper methods
+require 'helpers.php';
+
 return $app;

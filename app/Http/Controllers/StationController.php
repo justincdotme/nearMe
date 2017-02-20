@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Src\ChargeStationListInterface;
 use App\Src\LocationServiceInterface;
-use Illuminate\Http\Request;
 use Exception;
 
 class StationController extends Controller
@@ -15,13 +14,11 @@ class StationController extends Controller
 
     public function __construct(
         LocationServiceInterface $locationService,
-        ChargeStationListInterface $stationListService,
-        Request $request
+        ChargeStationListInterface $stationListService
     )
     {
         $this->locationService = $locationService;
         $this->stationListService = $stationListService;
-        $this->request = $request;
 
     }
 
@@ -34,7 +31,7 @@ class StationController extends Controller
     {
         try {
             $this->validate(
-                $this->request, [
+                request(), [
                     'address' => 'required'
                 ]
             );
@@ -45,7 +42,10 @@ class StationController extends Controller
             ]);
         }
 
-        $coords = $this->locationService->byAddress($this->request->address);
+        $coords = $this->locationService->byAddress(
+            request('address')
+        );
+
         if (!$coords->isEmpty()) {
             return response()->json([
                 'status' => 'success',
@@ -53,10 +53,9 @@ class StationController extends Controller
                     $coords->get('lat'),
                     $coords->get('lng'),
                     [
-                        'maxresults' => $this->request->input('limit'),
-                        'distance' => $this->request->input('distance'),
+                        'maxresults' => request('limit'),
+                        'distance' => request('distance'),
                     ]
-
                 ),
                 'coords' => $coords
             ]);
@@ -81,7 +80,7 @@ class StationController extends Controller
     {
         try {
             $this->validate(
-                $this->request, [
+                request(), [
                     'lat' => 'required',
                     'lng' => 'required'
                 ]
@@ -97,8 +96,8 @@ class StationController extends Controller
             ]);
         }
 
-        $lat = $this->request->input('lat');
-        $lng = $this->request->input('lng');
+        $lat = request('lat');
+        $lng = request('lng');
 
         return response()->json([
             'status' => 'success',
@@ -106,8 +105,8 @@ class StationController extends Controller
                 $lat,
                 $lng,
                 [
-                    'maxresults' => $this->request->input('limit'),
-                    'distance' => $this->request->input('distance'),
+                    'maxresults' => request('limit'),
+                    'distance' => request('distance'),
                 ]
 
             ),
