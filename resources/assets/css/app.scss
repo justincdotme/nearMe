@@ -4,6 +4,21 @@ $dark-blue: #03353E;
 $light-grey: #888;
 $off-white: #e6f0f2;
 
+/* Mixins */
+@mixin box-shadow($top, $left, $blur, $color, $inset: false) {
+  @if $inset {
+    -webkit-box-shadow:inset $top $left $blur $color;
+    -moz-box-shadow:inset $top $left $blur $color;
+    box-shadow:inset $top $left $blur $color;
+  } @else {
+    -webkit-box-shadow: $top $left $blur $color;
+    -moz-box-shadow: $top $left $blur $color;
+    box-shadow: $top $left $blur $color;
+  }
+}
+
+
+
 body {
   background-color: $light-blue;
   color: $dark-blue;
@@ -36,9 +51,7 @@ body {
 }
 .panel-result-preview {
   background-color: $off-white;
-  -webkit-box-shadow: 4px 4px 4px 0px rgba(63,146,161,0.5);
-  -moz-box-shadow: 4px 4px 4px 0px rgba(63,146,161,0.5);
-  box-shadow: 4px 4px 4px 0px rgba(63,146,161,0.5);
+  @include box-shadow(4px, 4px, 4px, rgba(63,146,161,0.5));
   font-size: 1.025em;
 
   h3 {
