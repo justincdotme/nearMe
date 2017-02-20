@@ -1,0 +1,67 @@
+/* Define global colors */
+$light-blue: #0294A5;
+$dark-blue: #03353E;
+$light-grey: #888;
+$off-white: #e6f0f2;
+
+body {
+  background-color: $light-blue;
+  color: $dark-blue;
+
+  #search-bar {
+    background-color: $dark-blue;
+    height: 66px;
+    padding: 8px 0;
+
+    ::-webkit-input-placeholder {
+      color: $light-blue;
+    }
+    :-moz-placeholder { /* Firefox 18- */
+      color: $light-blue;
+    }
+    ::-moz-placeholder {  /* Firefox 19+ */
+      color: $light-blue;
+    }
+    :-ms-input-placeholder {
+      color: $light-blue;
+    }
+    #search-button i.fa-search {
+      color: $light-blue;
+    }
+  }
+}
+#map-container {
+  margin: 20px 0;
+  height: 100%;
+}
+.panel-result-preview {
+  background-color: $off-white;
+  -webkit-box-shadow: 4px 4px 4px 0px rgba(63,146,161,0.5);
+  -moz-box-shadow: 4px 4px 4px 0px rgba(63,146,161,0.5);
+  box-shadow: 4px 4px 4px 0px rgba(63,146,161,0.5);
+  font-size: 1.025em;
+
+  h3 {
+    color: $dark-blue;
+    font-size: 1.125em;
+    font-weight: bold;
+  }
+
+  .row.quick-info {
+    margin: 10px 0 5px 0;
+    span {
+      color: $light-grey;
+    }
+  }
+
+  button.view-details {
+    margin-top: 8px;
+    width: 100%;
+    background-color: $light-blue;
+    padding: 14px 0;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.125em;
+    border: none;
+  }
+}

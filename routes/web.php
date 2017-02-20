@@ -1,7 +1,10 @@
 <?php
 
 $app->get('/', function () {
-    return view('home');
+    return view('home')
+        ->with([
+            'gMapApiKey' => env('GOOGLE_MAP_APIKEY')
+        ]);
 });
 
 $app->get('address',[
