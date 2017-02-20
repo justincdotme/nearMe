@@ -1,4 +1,8 @@
 <?php
+/**
+ * Helper functions ported from Laravel 5.4.
+ * NOTE: I did not write a single line of code in this file.
+ */
 
 if (! function_exists('request')) {
     /**
