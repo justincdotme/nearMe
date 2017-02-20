@@ -17,8 +17,14 @@ $off-white: #e6f0f2;
   }
 }
 
+@mixin placeholder {
+  ::-webkit-input-placeholder {@content}
+  :-moz-placeholder           {@content} /* Firefox 18- */
+  ::-moz-placeholder          {@content} /* Firefox 19+ */
+  :-ms-input-placeholder      {@content}
+}
 
-
+/* Styles */
 body {
   background-color: $light-blue;
   color: $dark-blue;
@@ -28,19 +34,7 @@ body {
     height: 66px;
     padding: 8px 0;
 
-    ::-webkit-input-placeholder {
-      color: $light-blue;
-    }
-    :-moz-placeholder { /* Firefox 18- */
-      color: $light-blue;
-    }
-    ::-moz-placeholder {  /* Firefox 19+ */
-      color: $light-blue;
-    }
-    :-ms-input-placeholder {
-      color: $light-blue;
-    }
-    #search-button i.fa-search {
+    @include placeholder {
       color: $light-blue;
     }
   }
