@@ -19,16 +19,10 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <style>
-        #map-container {
-            min-height: 500px;
-            width: 100%;
-        }
-    </style>
 </head>
 <body id="page-top" class="index">
 <header>
-    <div class="row-fluid" id="search-bar">
+    <div class="row-fluid" id="top-bar">
         <div class="col-xs-12 col-md-8 col-md-offset-2 text-center">
             <div class="input-group input-group-lg">
                 <input type="text" class="form-control" placeholder="Address">
@@ -85,7 +79,7 @@
                         </div>
                         <div class="row">
                             <div class="col-xs-12">
-                                <button type="button" class="btn btn-default view-details">View Details</button>
+                                <button type="button" class="btn btn-default view-details" onclick="window.location.href = '/details'">View Details</button>
                             </div>
                         </div>
                     </div>
@@ -126,7 +120,7 @@
                         </div>
                         <div class="row">
                             <div class="col-xs-12">
-                                <button type="button" class="btn btn-default view-details">View Details</button>
+                                <button type="button" class="btn btn-default view-details" onclick="window.location.href = '/details'">View Details</button>
                             </div>
                         </div>
                     </div>
@@ -167,7 +161,7 @@
                         </div>
                         <div class="row">
                             <div class="col-xs-12">
-                                <button type="button" class="btn btn-default view-details">View Details</button>
+                                <button type="button" class="btn btn-default view-details" onclick="window.location.href = '/details'">View Details</button>
                             </div>
                         </div>
                     </div>
@@ -208,7 +202,7 @@
                         </div>
                         <div class="row">
                             <div class="col-xs-12">
-                                <button type="button" class="btn btn-default view-details">View Details</button>
+                                <button type="button" class="btn btn-default view-details" onclick="window.location.href = '/details'">View Details</button>
                             </div>
                         </div>
                     </div>

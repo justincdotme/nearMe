@@ -7,6 +7,15 @@ $app->get('/', function () {
         ]);
 });
 
+//TODO - Temp route for initial coding of details view.
+$app->get('details', function () {
+    return view('details')
+        ->with([
+            'gMapApiKey' => env('GOOGLE_MAP_APIKEY')
+        ]);
+});
+
+
 $app->get('address',[
     'as' => 'stations.address',
     'uses' => 'StationController@searchByAddress'

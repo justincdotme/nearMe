@@ -6,69 +6,85 @@ $off-white: #e6f0f2;
 
 /* Mixins */
 @mixin box-shadow($top, $left, $blur, $color, $inset: false) {
-  @if $inset {
-    -webkit-box-shadow:inset $top $left $blur $color;
-    -moz-box-shadow:inset $top $left $blur $color;
-    box-shadow:inset $top $left $blur $color;
-  } @else {
-    -webkit-box-shadow: $top $left $blur $color;
-    -moz-box-shadow: $top $left $blur $color;
-    box-shadow: $top $left $blur $color;
-  }
+    @if $inset {
+        -webkit-box-shadow: inset $top $left $blur $color;
+        -moz-box-shadow: inset $top $left $blur $color;
+        box-shadow: inset $top $left $blur $color;
+    } @else {
+        -webkit-box-shadow: $top $left $blur $color;
+        -moz-box-shadow: $top $left $blur $color;
+        box-shadow: $top $left $blur $color;
+    }
 }
 
 @mixin placeholder {
-  ::-webkit-input-placeholder {@content}
-  :-moz-placeholder           {@content} /* Firefox 18- */
-  ::-moz-placeholder          {@content} /* Firefox 19+ */
-  :-ms-input-placeholder      {@content}
+    ::-webkit-input-placeholder {
+        @content
+    }
+    :-moz-placeholder {
+        @content
+    }
+    /* Firefox 18- */
+    ::-moz-placeholder {
+        @content
+    }
+    /* Firefox 19+ */
+    :-ms-input-placeholder {
+        @content
+    }
 }
 
 /* Styles */
 body {
-  background-color: $light-blue;
-  color: $dark-blue;
+    background-color: $light-blue;
+    color: $dark-blue;
+}
 
-  #search-bar {
+#top-bar {
     background-color: $dark-blue;
     height: 66px;
     padding: 8px 0;
 
     @include placeholder {
-      color: $light-blue;
+        color: $light-blue;
     }
-  }
+
+    h1 {
+        color: #fff;
+    }
 }
+
 #map-container {
-  margin: 20px 0;
-  height: 100%;
+    margin: 20px 0;
+    min-height: 500px;
 }
+
 .panel-result-preview {
-  background-color: $off-white;
-  @include box-shadow(4px, 4px, 4px, rgba(63,146,161,0.5));
-  font-size: 1.025em;
+    background-color: $off-white;
+    @include box-shadow(4px, 4px, 4px, rgba(63, 146, 161, 0.5));
+    font-size: 1.025em;
 
-  h3 {
-    color: $dark-blue;
-    font-size: 1.125em;
-    font-weight: bold;
-  }
-
-  .row.quick-info {
-    margin: 10px 0 5px 0;
-    span {
-      color: $light-grey;
+    h3 {
+        color: $dark-blue;
+        font-size: 1.125em;
+        font-weight: bold;
     }
-  }
 
-  button.view-details {
-    margin-top: 8px;
-    width: 100%;
-    background-color: $light-blue;
-    padding: 14px 0;
-    color: #fff;
-    font-weight: bold;
-    font-size: 1.125em;
-    border: none;
-  }
+    .row.quick-info {
+        margin: 10px 0 5px 0;
+        span {
+            color: $light-grey;
+        }
+    }
+
+    button.view-details {
+        margin-top: 8px;
+        width: 100%;
+        background-color: $light-blue;
+        padding: 14px 0;
+        color: #fff;
+        font-weight: bold;
+        font-size: 1.125em;
+        border: none;
+    }
 }
