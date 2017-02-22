@@ -23,16 +23,95 @@
 <body id="page-top" class="index">
 <header>
     <div class="row-fluid" id="top-bar">
-        <div class="col-xs-12 col-md-8 col-md-offset-2 text-center">
-            <h1>1234 Any St</h1>
+        <div class="col-xs-10 col-md-8 col-md-offset-1 text-center">
+            <div class="col-xs-2 text-right">
+                <i class="fa fa-arrow-circle-left back-button" aria-hidden="true"></i>
+            </div>
+            <div class="col-xs-10">
+                <h1>1234 Any St</h1>
+            </div>
         </div>
     </div>
 </header>
 <div class="row-fluid details" id="body">
     <div class="col-xs-12 col-md-8 col-md-offset-2 text-center">
-        <div class="panel panel-default panel-result-preview">
+        <div class="panel panel-default" id="full-detail-panel">
             <div class="panel-body">
-                <h1>Station Details</h1>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <h2 class="">Location Details</h2>
+                                <dl class="detail-list">
+                                    <dt>Address</dt>
+                                    <dd>1234 Any St Vancouver, WA 98686</dd>
+                                    <dt>Name</dt>
+                                    <dd>-</dd>
+                                    <dt>Distance</dt>
+                                    <dd>2.2 miles</dd>
+                                    <dt>Lat</dt>
+                                    <dd>45.720387t</dd>
+                                    <dt>Lng</dt>
+                                    <dd>-122.648554</dd>
+                                    <dt>Connections</dt>
+                                    <dd>-</dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <img src="http://placehold.it/380x208">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <h2 class="">Charging Details</h2>
+                                <dl class="detail-list">
+                                    <dt>Level</dt>
+                                    <dd>Level2, Level 3</dd>
+                                    <dt>Amps</dt>
+                                    <dd>16</dd>
+                                    <dt>Voltage</dt>
+                                    <dd>230</dd>
+                                    <dt>kW</dt>
+                                    <dd>3</dd>
+                                    <dt>Fast Charge</dt>
+                                    <dd>Yes</dd> <!-- Icon here -->
+                                    <dt>Connections</dt>
+                                    <dd>4</dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <h2 class="">Operator Details</h2>
+                                <dl class="detail-list">
+                                    <dt>Name</dt>
+                                    <dd>Foobarz Inc.</dd>
+                                    <dt>Website</dt>
+                                    <dd>https://foobar.com</dd>
+                                    <dt>Phone</dt>
+                                    <dd>123-456-7890</dd>
+                                    <dt>Email</dt>
+                                    <dd>barbaz@foo.com</dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6 col-xs-offset-3">
+                        <button type="button" class="btn btn-default view-map">Open in Map</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

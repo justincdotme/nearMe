@@ -55,6 +55,11 @@ button.btn:active:focus {
     color: $dark-green;
 }
 
+.panel {
+    background-color: rgba(255, 255, 255, 0.95);
+    font-size: 1.025em;
+}
+
 /* Styles */
 body {
     background-color: #4FB4A5;
@@ -65,13 +70,14 @@ body {
     background-color: #2a8474;
     height: 66px;
     padding: 8px 0;
+    color: #fff;
 
     @include placeholder {
         color: $light-green;
     }
 
-    h1 {
-        color: #fff;
+    i.back-button {
+        font-size: 2.125em;
     }
 }
 
@@ -82,9 +88,6 @@ body {
 
 .panel-result-preview {
     @include box-shadow(4px, 4px, 4px, rgba(63, 146, 161, 0.5));
-    background-color: rgba(255, 255, 255, 0.95);
-    font-size: 1.025em;
-
     h3 {
         color: $dark-green;
         font-size: 1.125em;
@@ -98,15 +101,46 @@ body {
             color: $light-grey;
         }
     }
+}
 
-    button.view-details {
-        margin-top: 8px;
-        width: 100%;
-        background-color: $light-green;
-        padding: 14px 0;
-        color: #fff;
-        font-weight: bold;
-        font-size: 1.125em;
+.panel#full-detail-panel {
+    @include box-shadow(4px, 4px, 4px, rgba(63, 146, 161, 0.5));
+
+    dl {
+        width: 50%;
+        overflow: hidden;
+        padding: 0;
+        margin: 0 auto;
+    }
+    dt {
+        text-align: left;
+        float: left;
+        width: 50%;
+        padding: 0;
+        margin: 0;
+    }
+    dd {
+        text-align: left;
+        float: left;
+        width: 50%;
+        padding: 0;
+        margin: 0;
+    }
+
+    .panel-default {
+        @include box-shadow(4px, 4px, 4px, rgba(63, 146, 161, 0.25));
         border: none;
     }
+}
+
+button.btn.view-map,
+button.btn.view-details {
+    margin-top: 8px;
+    width: 100%;
+    background-color: $light-green;
+    padding: 14px 0;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.125em;
+    border: none;
 }
