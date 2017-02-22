@@ -1,8 +1,8 @@
 /* Define global colors */
-$light-blue: #0294A5;
-$dark-blue: #03353E;
+$light-green: #4FB4A5;
+$dark-green: #2a8474;
 $light-grey: #888;
-$off-white: #e6f0f2;
+$off-white: #dfdce3;
 
 /* Mixins */
 @mixin box-shadow($top, $left, $blur, $color, $inset: false) {
@@ -16,6 +16,13 @@ $off-white: #e6f0f2;
         box-shadow: $top $left $blur $color;
     }
 }
+
+@mixin border-radius($radius) {
+    -webkit-border-radius: $radius;
+    border-radius: $radius;
+    background-clip: padding-box;
+}
+
 
 @mixin placeholder {
     ::-webkit-input-placeholder {
@@ -34,19 +41,34 @@ $off-white: #e6f0f2;
     }
 }
 
+/* Bootstrap overrides */
+.panel,
+button.btn,
+.input-group-lg>.form-control, .input-group-lg>.input-group-addon, .input-group-lg>.input-group-btn>.btn {
+    @include border-radius(0);
+}
+
+button.btn:active,
+button.btn:active:focus {
+    background-color: $off-white;
+    color: $dark-green;
+}
+
 /* Styles */
 body {
-    background-color: $light-blue;
-    color: $dark-blue;
+    /*background-color: $light-green;*/
+    background-color: #4FB4A5;
+    color: $dark-green;
 }
 
 #top-bar {
-    background-color: $dark-blue;
+    //background-color: $dark-green;
+    background-color: #2a8474;
     height: 66px;
     padding: 8px 0;
 
     @include placeholder {
-        color: $light-blue;
+        color: $light-green;
     }
 
     h1 {
@@ -60,14 +82,15 @@ body {
 }
 
 .panel-result-preview {
-    background-color: $off-white;
+    background-color: rgba(255, 255, 255, 0.95);
     @include box-shadow(4px, 4px, 4px, rgba(63, 146, 161, 0.5));
     font-size: 1.025em;
 
     h3 {
-        color: $dark-blue;
+        color: $dark-green;
         font-size: 1.125em;
         font-weight: bold;
+        margin-top: 0.125em;
     }
 
     .row.quick-info {
@@ -80,7 +103,7 @@ body {
     button.view-details {
         margin-top: 8px;
         width: 100%;
-        background-color: $light-blue;
+        background-color: $light-green;
         padding: 14px 0;
         color: #fff;
         font-weight: bold;
