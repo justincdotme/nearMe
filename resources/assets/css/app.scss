@@ -23,7 +23,6 @@ $off-white: #dfdce3;
     background-clip: padding-box;
 }
 
-
 @mixin placeholder {
     ::-webkit-input-placeholder {
         @content
@@ -44,7 +43,9 @@ $off-white: #dfdce3;
 /* Bootstrap overrides */
 .panel,
 button.btn,
-.input-group-lg>.form-control, .input-group-lg>.input-group-addon, .input-group-lg>.input-group-btn>.btn {
+.input-group-lg > .form-control,
+.input-group-lg > .input-group-addon,
+.input-group-lg > .input-group-btn > .btn {
     @include border-radius(0);
 }
 
@@ -56,13 +57,11 @@ button.btn:active:focus {
 
 /* Styles */
 body {
-    /*background-color: $light-green;*/
     background-color: #4FB4A5;
     color: $dark-green;
 }
 
 #top-bar {
-    //background-color: $dark-green;
     background-color: #2a8474;
     height: 66px;
     padding: 8px 0;
@@ -82,8 +81,8 @@ body {
 }
 
 .panel-result-preview {
-    background-color: rgba(255, 255, 255, 0.95);
     @include box-shadow(4px, 4px, 4px, rgba(63, 146, 161, 0.5));
+    background-color: rgba(255, 255, 255, 0.95);
     font-size: 1.025em;
 
     h3 {
