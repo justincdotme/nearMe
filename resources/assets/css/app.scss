@@ -3,6 +3,7 @@ $light-green: #4FB4A5;
 $dark-green: #2a8474;
 $light-grey: #888;
 $off-white: #dfdce3;
+$off-white-alt: #ebe8ed;
 
 /* Mixins */
 @mixin box-shadow($top, $left, $blur, $color, $inset: false) {
@@ -51,8 +52,8 @@ button.btn,
 
 button.btn:active,
 button.btn:active:focus {
-    background-color: $off-white;
-    color: $dark-green;
+    background-color: $light-green;
+    color: $off-white;
 }
 
 .panel {
@@ -76,8 +77,15 @@ body {
         color: $light-green;
     }
 
-    i.back-button {
-        font-size: 2.125em;
+    a i.back-button {
+        font-size: 3.75em;
+        color: #fff;
+    }
+
+    h1#detail-name {
+        font-weight: bold;
+        font-size: 2.25em;
+        margin: .25em 0 0 .25em;
     }
 }
 
@@ -103,28 +111,22 @@ body {
     }
 }
 
-.panel#full-detail-panel {
+.row.detail-row .panel {
     @include box-shadow(4px, 4px, 4px, rgba(63, 146, 161, 0.5));
 
-    dl {
-        width: 50%;
-        overflow: hidden;
-        padding: 0;
+    table.detail-list {
+        width: 90%;
         margin: 0 auto;
+        font-size: 1.185em;
     }
-    dt {
-        text-align: left;
-        float: left;
-        width: 50%;
-        padding: 0;
-        margin: 0;
+
+    td {
+        padding: 3px 4px;
+        vertical-align: top;
     }
-    dd {
-        text-align: left;
-        float: left;
-        width: 50%;
-        padding: 0;
-        margin: 0;
+
+    tr:nth-child(even) {
+        background-color: $off-white-alt;
     }
 
     .panel-default {
@@ -133,14 +135,22 @@ body {
     }
 }
 
-button.btn.view-map,
+.row.detail-row .panel-body {
+    min-height: 425px;
+}
+
+button.btn#view-map,
 button.btn.view-details {
     margin-top: 8px;
     width: 100%;
-    background-color: $light-green;
+    background-color: $dark-green;
     padding: 14px 0;
     color: #fff;
     font-weight: bold;
     font-size: 1.125em;
     border: none;
+}
+
+button.btn#view-map {
+    margin: 3em 0;
 }

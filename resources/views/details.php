@@ -24,98 +24,159 @@
 <header>
     <div class="row-fluid" id="top-bar">
         <div class="col-xs-10 col-md-8 col-md-offset-1 text-center">
-            <div class="col-xs-2 text-right">
-                <i class="fa fa-arrow-circle-left back-button" aria-hidden="true"></i>
+            <div class="col-xs-3 text-right">
+                <a href="/">
+                    <i class="fa fa-arrow-circle-left back-button" aria-hidden="true"></i>
+                </a>
             </div>
-            <div class="col-xs-10">
-                <h1>1234 Any St</h1>
+            <div class="col-xs-9">
+                <h1 id="detail-name">1234 Any St</h1>
             </div>
         </div>
     </div>
 </header>
-<div class="row-fluid details" id="body">
+<div class="row-fluid" id="body">
     <div class="col-xs-12 col-md-8 col-md-offset-2 text-center">
-        <div class="panel panel-default" id="full-detail-panel">
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-xs-6">
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                <h2 class="">Location Details</h2>
-                                <dl class="detail-list">
-                                    <dt>Address</dt>
-                                    <dd>1234 Any St Vancouver, WA 98686</dd>
-                                    <dt>Name</dt>
-                                    <dd>-</dd>
-                                    <dt>Distance</dt>
-                                    <dd>2.2 miles</dd>
-                                    <dt>Lat</dt>
-                                    <dd>45.720387t</dd>
-                                    <dt>Lng</dt>
-                                    <dd>-122.648554</dd>
-                                    <dt>Connections</dt>
-                                    <dd>-</dd>
-                                </dl>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-6">
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                <img src="http://placehold.it/380x208">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-6">
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                <h2 class="">Charging Details</h2>
-                                <dl class="detail-list">
-                                    <dt>Level</dt>
-                                    <dd>Level2, Level 3</dd>
-                                    <dt>Amps</dt>
-                                    <dd>16</dd>
-                                    <dt>Voltage</dt>
-                                    <dd>230</dd>
-                                    <dt>kW</dt>
-                                    <dd>3</dd>
-                                    <dt>Fast Charge</dt>
-                                    <dd>Yes</dd> <!-- Icon here -->
-                                    <dt>Connections</dt>
-                                    <dd>4</dd>
-                                </dl>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-6">
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                <h2 class="">Operator Details</h2>
-                                <dl class="detail-list">
-                                    <dt>Name</dt>
-                                    <dd>Foobarz Inc.</dd>
-                                    <dt>Website</dt>
-                                    <dd>https://foobar.com</dd>
-                                    <dt>Phone</dt>
-                                    <dd>123-456-7890</dd>
-                                    <dt>Email</dt>
-                                    <dd>barbaz@foo.com</dd>
-                                </dl>
-                            </div>
+        <div id="map-container">
+        </div>
+    </div>
+</div>
+<div class="row-fluid details" id="body">
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
+        <div class="row detail-row">
+            <div class="col-sm-6 col-lg-4">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h2 class="text-center">Charging Details</h2>
+                        <table class="detail-list">
+                            <tr>
+                                <td>Level(s)</td>
+                                <td>2, 3</td>
+                            </tr>
+                            <tr>
+                                <td>Amps</td>
+                                <td>16</td>
+                            </tr>
+                            <tr>
+                                <td>Voltage</td>
+                                <td>230</td>
+                            </tr>
+                            <tr>
+                                <td>kW</td>
+                                <td>3</td>
+                            </tr>
+                            <tr>
+                                <td>Fast Charge</td>
+                                <td>Yes</td> <!-- Icon here -->
+                            </tr>
+                            <tr>
+                                <td>Connections</td>
+                                <td>4</td>
+                            </tr>
+                        </table>
+                        <div class="hidden-lg">
+                            <h2 class="text-center">Operator Details</h2>
+                            <table class="detail-list">
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Foobarz Inc.</td>
+                                </tr>
+                                <tr>
+                                    <td>Website</td>
+                                    <td>https://foobar.com</td>
+                                </tr>
+                                <tr>
+                                    <td>Phone</td>
+                                    <td>123-456-7890</td>
+                                </tr>
+                                <tr>
+                                    <td>Email</td>
+                                    <td>barbaz@foo.com</td>
+                                </tr>
+                            </table>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-xs-6 col-xs-offset-3">
-                        <button type="button" class="btn btn-default view-map">Open in Map</button>
+            </div>
+            <div class="col-lg-4 hidden-xs hidden-sm hidden-md">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h2 class="text-center">Operator Details</h2>
+                        <table class="detail-list">
+                            <tr>
+                                <td>Name</td>
+                                <td>Foobarz Inc.</td>
+                            </tr>
+                            <tr>
+                                <td>Website</td>
+                                <td>https://foobar.com</td>
+                            </tr>
+                            <tr>
+                                <td>Phone</td>
+                                <td>123-456-7890</td>
+                            </tr>
+                            <tr>
+                                <td>Email</td>
+                                <td>barbaz@foo.com</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-4">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h2 class="text-center">Location Details</h2>
+                        <table class="detail-list">
+                            <tr>
+                                <td>Address</td>
+                                <td>1234 Any St Vancouver, WA 98686</td>
+                            </tr>
+                            <tr>
+                                <td>Name</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>Distance</td>
+                                <td>2.2 miles</td>
+                            </tr>
+                            <tr>
+                                <td>Lat</td>
+                                <td>45.720387</td>
+                            </tr>
+                            <tr>
+                                <td>Lng</td>
+                                <td>-122.648554</td>
+                            </tr>
+                        </table>
+                        <button type="button" id="view-map" class="btn btn-default view-map">Open in Map Application</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script>
+    function showZoo() {
+        var nationalZoo = {
+            lat: 38.89829066332753,
+            lng: -77.03690404999998
+        };
+
+        var map = new google.maps.Map(document.getElementById('map-container'), {
+            zoom: 12,
+            center: nationalZoo
+        });
+
+        new google.maps.Marker({
+            position: nationalZoo,
+            map: map
+        });
+    }
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=<?= $gMapApiKey; ?>&callback=showZoo">
+</script>
 <script src="/assets/js/dist/vendor.js"></script>
 <script src="/assets/js/dist/app.js"></script>
 </body>
