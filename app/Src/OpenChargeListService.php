@@ -51,12 +51,19 @@ class OpenChargeListService implements ChargeStationListInterface
                 $kilowatts = [];
                 $fastChargeCapable = false;
                 foreach ($connections as $connection) {
-                    if (!in_array($connection->Level->Title, $levels)) {
-                        $levels[] = [
-                            'id' => $connection->Level->ID,
-                            'title' => $connection->Level->Title
-                        ];
+                    if (null != $connection->Level) {
+                        if (!in_array($connection->Level->Title, $levels)) {
+                            $levels[] = [
+                                'id' => $connection->Level->ID,
+                                'title' => $connection->Level->Title
+                            ];
+                        }
+
+                        if ($connection->Level->IsFastChargeCapable) {
+                            $fastChargeCapable = true;
+                        }
                     }
+
                     //Create a range of available amperage
                     if (!in_array($connection->Amps, $amperages) && null != $connection->Amps) {
                         $amperages[] = $connection->Amps;
@@ -68,10 +75,6 @@ class OpenChargeListService implements ChargeStationListInterface
                     //Create a range of available kilowatts
                     if (!in_array($connection->PowerKW, $kilowatts) && null != $connection->PowerKW) {
                         $kilowatts[] = $connection->PowerKW;
-                    }
-
-                    if ($connection->Level->IsFastChargeCapable) {
-                        $fastChargeCapable = true;
                     }
                 }
 
