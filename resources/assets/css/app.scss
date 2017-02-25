@@ -81,12 +81,24 @@ body {
         font-size: 3.75em;
         color: #fff;
     }
-
     h1#detail-name {
         font-weight: bold;
-        font-size: 2.25em;
-        margin: .25em 0 0 .25em;
     }
+
+    @media only screen and (min-width : 320px) {
+        h1#detail-name {
+            font-size: 1.5em;
+            margin: 0.25em 0 0 0;
+        }
+    }
+
+    @media only screen and (min-width : 768px) {
+        h1#detail-name {
+            font-size: 2.25em;
+            margin: .25em 0 0 .25em;
+        }
+    }
+
 }
 
 #map-container {
@@ -115,7 +127,7 @@ body {
     @include box-shadow(4px, 4px, 4px, rgba(63, 146, 161, 0.5));
 
     table.detail-list {
-        width: 90%;
+        width: 100%;
         margin: 0 auto;
         font-size: 1.185em;
     }
