@@ -3,16 +3,13 @@
 $app->get('/', function () {
     return view('home')
         ->with([
-            'gMapApiKey' => env('GOOGLE_MAP_APIKEY')
+            'gMapApiKey' => env('GEOCODE_GOOGLE_APIKEY')
         ]);
 });
 
 //TODO - Temp route for initial coding of details view.
 $app->get('details', function () {
-    return view('details')
-        ->with([
-            'gMapApiKey' => env('GOOGLE_MAP_APIKEY')
-        ]);
+    return view('details');
 });
 
 

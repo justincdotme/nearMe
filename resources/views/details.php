@@ -155,27 +155,6 @@
         </div>
     </div>
 </div>
-<script>
-    function showZoo() {
-        var nationalZoo = {
-            lat: 38.89829066332753,
-            lng: -77.03690404999998
-        };
-
-        var map = new google.maps.Map(document.getElementById('map-container'), {
-            zoom: 12,
-            center: nationalZoo
-        });
-
-        new google.maps.Marker({
-            position: nationalZoo,
-            map: map
-        });
-    }
-</script>
-<script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=<?= $gMapApiKey; ?>&callback=showZoo">
-</script>
 <script src="/assets/js/dist/vendor.js"></script>
 <script src="/assets/js/dist/app.js"></script>
 </body>

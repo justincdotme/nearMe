@@ -53,8 +53,8 @@ class StationController extends Controller
                     $coords->get('lat'),
                     $coords->get('lng'),
                     [
-                        'maxresults' => request('limit'),
-                        'distance' => request('distance'),
+                        'maxresults' => env('OPEN_CHARGE_API_MAX_RESULTS'),
+                        'distance' => env('OPEN_CHARGE_API_SEARCH_RADIUS'),
                     ]
                 ),
                 'coords' => $coords,
@@ -108,8 +108,8 @@ class StationController extends Controller
                 $coords['lat'],
                 $coords['lng'],
                 [
-                    'maxresults' => request('limit'),
-                    'distance' => request('distance'),
+                    'maxresults' => env('OPEN_CHARGE_API_MAX_RESULTS'),
+                    'distance' => env('OPEN_CHARGE_API_SEARCH_RADIUS'),
                 ]
 
             ),
