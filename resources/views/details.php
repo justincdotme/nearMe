@@ -35,10 +35,9 @@
         </div>
     </div>
 </header>
-<div class="row-fluid" id="body">
+<div class="row-fluid">
     <div class="col-xs-12 col-md-8 col-md-offset-2 text-center">
-        <div id="map-container">
-        </div>
+        <h1>Location Details For 1234 Any St</h1>
     </div>
 </div>
 <div class="row-fluid details" id="body">
