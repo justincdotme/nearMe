@@ -22,50 +22,47 @@
 
 </head>
 <body id="page-top" class="index">
-
-<div id="app" v-cloak>
-    <header>
-        <div class="row-fluid" id="top-bar">
-            <div class="col-xs-12 col-md-8 col-md-offset-2 text-center">
-                <search-bar></search-bar>
-            </div>
-        </div>
-    </header>
-    <div class="row-fluid" id="body">
-        <div v-show="hasInvalidAddress" id="invalid-address-error">
-            <h1>Invalid Address</h1>
-        </div>
-        <div v-show="noStationsFound" id="station-list-empty">
-            <h1>No Stations Found</h1>
-        </div>
-        <div class="col-xs-12 col-md-8 col-md-offset-2 text-center">
-            <gmap-map :center="center" :zoom="12">
-                <gmap-marker
-                        v-for="m in markers"
-                        :position="m.position"
-                        :clickable="true"
-                        :draggable="true"
-                        @click="center=m.position"
-                >
-                </gmap-marker>
-            </gmap-map>
-        </div>
-        <div class="row-fluid" id="station-list" v-if="showResults">
-            <div class="col-xs-12 col-md-8 col-md-offset-2">
-                <div class="row">
-                    <div v-for="station in stationList">
-                        <station></station>
-                    </div>
+    <div id="app" v-cloak>
+        <header>
+            <div class="row-fluid" id="top-bar">
+                <div class="col-xs-12 col-md-8 col-md-offset-2 text-center">
+                    <search-bar></search-bar>
                 </div>
             </div>
+        </header>
+        <div class="row-fluid" id="body">
+            <div v-show="hasInvalidAddress" id="invalid-address-error">
+                <h1>Invalid Address</h1>
+            </div>
+
+            <div v-show="noStationsFound" id="station-list-empty">
+                <h1>No Stations Found</h1>
+            </div>
+
+            <transition name="fade">
+                <div class="col-xs-12 col-md-8 col-md-offset-2 text-center" v-if="showResults">
+                    <gmap-map :center="center" :zoom="12">
+                        <gmap-marker v-for="m in markers" :position="m.position"></gmap-marker>
+                    </gmap-map>
+                </div>
+            </transition>
+
+            <transition name="fade">
+                <div class="row-fluid" id="station-list" v-if="showResults">
+                    <div class="col-xs-12 col-md-8 col-md-offset-2">
+                        <div class="row">
+                            <div v-for="station in stationList">
+                                <station></station>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </transition>
         </div>
     </div>
-</div>
-
 <script>
     window.googleMapsKey = "<?= $gMapApiKey; ?>";
 </script>
-
 <script src="/assets/js/dist/vendor.js"></script>
 <script src="/assets/js/dist/app.js"></script>
 </body>
