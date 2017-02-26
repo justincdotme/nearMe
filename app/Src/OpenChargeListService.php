@@ -95,7 +95,8 @@ class OpenChargeListService implements ChargeStationListInterface
                             'zip' => (isset($addressInfo->Postcode) ? $addressInfo->Postcode : null)
                         ],
                         'name' => (isset($addressInfo->Title) ? $addressInfo->Title : $addressInfo->AddressLine1),
-                        'distance' => (isset($addressInfo->Distance) ? $addressInfo->Distance : null),
+                        'usage' => (null != $item->UsageType) ? $item->UsageType->Title : 'Unknown',
+                        'distance' => (isset($addressInfo->Distance) ? round($addressInfo->Distance, 1) : null),
                         'lat' => (isset($addressInfo->Latitude) ? $addressInfo->Latitude : null),
                         'lng' => (isset($addressInfo->Longitude) ? $addressInfo->Longitude : null),
                         'connections' => [
