@@ -101,6 +101,7 @@ class StationController extends Controller
             'lat' => request('lat'),
             'lng' => request('lng')
         ];
+
         return response()->json([
             'status' => 'success',
             'list' => $this->stationListService->getList(
