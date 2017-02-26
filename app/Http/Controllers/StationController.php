@@ -57,7 +57,8 @@ class StationController extends Controller
                         'distance' => request('distance'),
                     ]
                 ),
-                'coords' => $coords
+                'coords' => $coords,
+                'address' => request('address')
             ]);
         }
 
