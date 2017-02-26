@@ -39,7 +39,7 @@ class StationController extends Controller
             return response()->json([
                 'status' => 'error',
                 'errors' => $e->validator->getMessageBag()
-            ]);
+            ], 422);
         }
 
         $coords = $this->locationService->byAddress(
@@ -93,7 +93,7 @@ class StationController extends Controller
                         'Could not get location from browser. Please enter an address and try again.'
                     ]
                 ]
-            ]);
+            ], 422);
         }
 
         $lat = request('lat');
