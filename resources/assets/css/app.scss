@@ -204,6 +204,10 @@ body {
         span {
             color: $light-grey;
         }
+
+        .fa.fa-bolt {
+            color: $dark-green;
+        }
     }
 }
 
@@ -233,6 +237,10 @@ body {
 
 .row.detail-row .panel-body {
     min-height: 425px;
+}
+
+h1 {
+    color: #fff;
 }
 
 button.btn#view-map,

@@ -31,14 +31,9 @@
             </div>
         </header>
         <div class="row-fluid" id="body">
-            <div v-show="hasInvalidAddress" id="invalid-address-error">
-                <h1>Invalid Address</h1>
-            </div>
-
             <div v-show="noStationsFound" id="station-list-empty">
                 <h1>No Stations Found</h1>
             </div>
-
             <transition name="fade">
                 <div class="col-xs-12 col-md-8 col-md-offset-2 text-center" v-if="shouldShowResults">
                     <gmap-map :center="location" :zoom="12">
@@ -46,13 +41,12 @@
                     </gmap-map>
                 </div>
             </transition>
-
             <transition name="fade">
                 <div class="row-fluid" id="station-list" v-if="shouldShowResults">
                     <div class="col-xs-12 col-md-8 col-md-offset-2">
                         <div class="row">
                             <div v-for="station in stationList">
-                                <station></station>
+                                <station-preview :station="station"></station-preview>
                             </div>
                         </div>
                     </div>
