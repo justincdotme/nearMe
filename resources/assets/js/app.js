@@ -5,6 +5,7 @@ import * as VueGoogleMaps from 'vue2-google-maps';
 import Axios from 'axios';
 import SearchBar from './components/search-bar.vue';
 import StationPreview from './components/station-preview.vue';
+import LoadingIcon from './components/loading-icon.vue';
 
 Vue.use(VueGoogleMaps, {
     load: {
@@ -31,7 +32,8 @@ window.app = new Vue({
     data: dataStore,
     components: {
         SearchBar,
-        StationPreview
+        StationPreview,
+        LoadingIcon
     },
     methods: {
         getLocation () {

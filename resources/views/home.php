@@ -58,6 +58,7 @@
                 <div class="row-fluid" id="station-list">
                     <div class="col-xs-12 col-md-8 col-md-offset-2">
                         <div class="row">
+                            <loading-icon></loading-icon>
                             <div v-if="shouldShowResults" v-for="station in stationList">
                                 <station-preview :station="station"></station-preview>
                             </div>
