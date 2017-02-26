@@ -40,15 +40,15 @@
             </div>
 
             <transition name="fade">
-                <div class="col-xs-12 col-md-8 col-md-offset-2 text-center" v-if="showResults">
-                    <gmap-map :center="center" :zoom="12">
+                <div class="col-xs-12 col-md-8 col-md-offset-2 text-center" v-if="shouldShowResults">
+                    <gmap-map :center="location" :zoom="12">
                         <gmap-marker v-for="m in markers" :position="m.position"></gmap-marker>
                     </gmap-map>
                 </div>
             </transition>
 
             <transition name="fade">
-                <div class="row-fluid" id="station-list" v-if="showResults">
+                <div class="row-fluid" id="station-list" v-if="shouldShowResults">
                     <div class="col-xs-12 col-md-8 col-md-offset-2">
                         <div class="row">
                             <div v-for="station in stationList">

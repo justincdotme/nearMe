@@ -97,21 +97,23 @@ class StationController extends Controller
             ], 422);
         }
 
-        $lat = request('lat');
-        $lng = request('lng');
-
+        $coords = [
+            'lat' => request('lat'),
+            'lng' => request('lng')
+        ];
         return response()->json([
             'status' => 'success',
             'list' => $this->stationListService->getList(
-                $lat,
-                $lng,
+                $coords['lat'],
+                $coords['lng'],
                 [
                     'maxresults' => request('limit'),
                     'distance' => request('distance'),
                 ]
 
             ),
-            'address' => $this->locationService->byCoordinates($lat, $lng)->get('address')
+            'coords' => $coords,
+            'address' => $this->locationService->byCoordinates($coords['lat'], $coords['lng'])->get('address')
         ]);
     }
 }

@@ -1,7 +1,7 @@
 require('./../css/app.scss');
 import Vue from 'vue';
 import * as VueGoogleMaps from 'vue2-google-maps';
-import axios from 'axios';
+import Axios from 'axios';
 
 Vue.use(VueGoogleMaps, {
     load: {
@@ -10,16 +10,15 @@ Vue.use(VueGoogleMaps, {
     },
 });
 
-//TODO - Refactor, this is getting ugly. We can infer a few of these
+//TODO - Refactor, this is getting ugly. We can infer a few of these as computed properties
 let data = {
     isLoading: true,
     hasInvalidAddress: false,
     hasGeoLocation: false,
-    showResults: false,
-    stationList: null,
     noStationsFound: false,
+    shouldShowResults: false,
+    stationList: null,
     location: {},
-    center: {},
     markers: [],
     address: null
 };
@@ -30,18 +29,32 @@ Vue.component('search-bar', {
     ],
     template: `
         <div class="input-group input-group-lg">
-            <gmap-autocomplete class="form-control" id="gmap-auto" placeholder="Address" :value="getStreetAddress()"></gmap-autocomplete>
+            <gmap-autocomplete 
+            class="form-control" 
+            id="gmap-auto" 
+            placeholder="Address" 
+            :value="address"
+            @place_changed="updateLocation"
+            ></gmap-autocomplete>
             <span class="input-group-btn">
                 <button class="btn btn-default" id="search-button" type="button">
-                    <i class="fa fa-search" aria-hidden="true" v-show="!isLoading" ></i>
+                    <i class="fa fa-search" aria-hidden="true" v-show="!isLoading" @click="addressSearch"></i>
                     <i class="fa fa-spinner slow-spin" aria-hidden="true" v-show="isLoading"></i>
                 </button>
             </span>
         </div>
     `,
     methods: {
-        getStreetAddress() {
-            return data.address;
+        updateLocation(place) {
+            data.address = place.formatted_address;
+        },
+
+        addressSearch() {
+            if (!data.isLoading) {
+                return app.populateListByAddress({
+                    address: data.address
+                });
+            }
         }
     },
 
@@ -126,12 +139,6 @@ window.app = new Vue({
         },
 
         initMap () {
-            //Center the map
-            this.center = {
-                lat: this.stationList[0].location.lat,
-                lng: this.stationList[0].location.lng
-            };
-
             //Add the markers
             this.stationList.forEach((value, i) => {
                 this.markers.push({
@@ -143,11 +150,12 @@ window.app = new Vue({
                 });
             });
 
-            this.showResults = true;
+            this.shouldShowResults = true;
         },
 
         fetchStationList (type, payload) {
-            this.stationList = axios.get('/' + type, {
+            this.isLoading = true;
+            this.stationList = Axios.get('/' + type, {
                 params: payload
             }).then((response) => {
 
@@ -155,9 +163,13 @@ window.app = new Vue({
                     //Populate the global station list
                     this.stationList = response.data.list;
                     this.address = response.data.address;
-
+                    this.location = {
+                        lat: parseFloat(response.data.coords.lat),
+                        lng: parseFloat(response.data.coords.lng)
+                    };
                     //Initialize the map
                     this.initMap();
+                    this.isLoading = false;
                 }
                 //TODO - More error handling
 
@@ -168,7 +180,8 @@ window.app = new Vue({
         },
 
         populateListByAddress (address) {
-            return this.fetchStationList('address', address);
+            this.fetchStationList('address', address);
+
         },
 
         populateListByCoords (coords) {
@@ -179,11 +192,10 @@ window.app = new Vue({
     mounted () {
         this.getLocation()
             .then((position) => {
-                this.location = {
+                this.populateListByCoords({
                     lat: position.coords.latitude,
                     lng: position.coords.longitude
-                };
-                this.populateListByCoords(this.location);
+                });
             }).catch((error) => {
             //TODO - Handle no geolocation
 
