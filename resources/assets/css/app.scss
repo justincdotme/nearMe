@@ -1,142 +1,7 @@
-/* Define global colors */
-$light-green: #4FB4A5;
-$dark-green: #2a8474;
-$light-grey: #888;
-$off-white: #dfdce3;
-$off-white-alt: #ebe8ed;
-
-/* Mixins */
-@mixin box-shadow($top, $left, $blur, $color, $inset: false) {
-    @if $inset {
-        -webkit-box-shadow: inset $top $left $blur $color;
-        -moz-box-shadow: inset $top $left $blur $color;
-        box-shadow: inset $top $left $blur $color;
-    } @else {
-        -webkit-box-shadow: $top $left $blur $color;
-        -moz-box-shadow: $top $left $blur $color;
-        box-shadow: $top $left $blur $color;
-    }
-}
-
-@mixin border-radius($radius) {
-    -webkit-border-radius: $radius;
-    border-radius: $radius;
-    background-clip: padding-box;
-}
-
-@mixin placeholder {
-    ::-webkit-input-placeholder {
-        @content
-    }
-    :-moz-placeholder {
-        @content
-    }
-    /* Firefox 18- */
-    ::-moz-placeholder {
-        @content
-    }
-    /* Firefox 19+ */
-    :-ms-input-placeholder {
-        @content
-    }
-}
-
-@mixin loading-icon {
-    .slow-spin {
-        -webkit-animation: spinner 1500ms infinite linear;
-        -moz-animation: spinner 1500ms infinite linear;
-        -ms-animation: spinner 1500ms infinite linear;
-        -o-animation: spinner 1500ms infinite linear;
-        animation: spinner 1500ms infinite linear;
-    }
-
-    /* Animation */
-
-    @-webkit-keyframes spinner {
-        0% {
-            -webkit-transform: rotate(0deg);
-            -moz-transform: rotate(0deg);
-            -ms-transform: rotate(0deg);
-            -o-transform: rotate(0deg);
-            transform: rotate(0deg);
-        }
-        100% {
-            -webkit-transform: rotate(360deg);
-            -moz-transform: rotate(360deg);
-            -ms-transform: rotate(360deg);
-            -o-transform: rotate(360deg);
-            transform: rotate(360deg);
-        }
-    }
-    @-moz-keyframes spinner {
-        0% {
-            -webkit-transform: rotate(0deg);
-            -moz-transform: rotate(0deg);
-            -ms-transform: rotate(0deg);
-            -o-transform: rotate(0deg);
-            transform: rotate(0deg);
-        }
-        100% {
-            -webkit-transform: rotate(360deg);
-            -moz-transform: rotate(360deg);
-            -ms-transform: rotate(360deg);
-            -o-transform: rotate(360deg);
-            transform: rotate(360deg);
-        }
-    }
-    @-o-keyframes spinner {
-        0% {
-            -webkit-transform: rotate(0deg);
-            -moz-transform: rotate(0deg);
-            -ms-transform: rotate(0deg);
-            -o-transform: rotate(0deg);
-            transform: rotate(0deg);
-        }
-        100% {
-            -webkit-transform: rotate(360deg);
-            -moz-transform: rotate(360deg);
-            -ms-transform: rotate(360deg);
-            -o-transform: rotate(360deg);
-            transform: rotate(360deg);
-        }
-    }
-    @keyframes spinner {
-        0% {
-            -webkit-transform: rotate(0deg);
-            -moz-transform: rotate(0deg);
-            -ms-transform: rotate(0deg);
-            -o-transform: rotate(0deg);
-            transform: rotate(0deg);
-        }
-        100% {
-            -webkit-transform: rotate(360deg);
-            -moz-transform: rotate(360deg);
-            -ms-transform: rotate(360deg);
-            -o-transform: rotate(360deg);
-            transform: rotate(360deg);
-        }
-    }
-}
-
-/* Bootstrap overrides */
-.panel,
-button.btn,
-.input-group-lg > .form-control,
-.input-group-lg > .input-group-addon,
-.input-group-lg > .input-group-btn > .btn {
-    @include border-radius(0);
-}
-
-button.btn:active,
-button.btn:active:focus {
-    background-color: $light-green;
-    color: $off-white;
-}
-
-.panel {
-    background-color: rgba(255, 255, 255, 0.95);
-    font-size: 1.025em;
-}
+@import './partials/colors.scss';
+@import './partials/mixins.scss';
+@import './partials/bootstrap-overrides.scss';
+@import './partials/vue-transitions.scss';
 
 /* Styles */
 [v-cloak] {
@@ -148,39 +13,8 @@ body {
     color: $dark-green;
 }
 
-#top-bar {
-    background-color: #2a8474;
-    height: 66px;
-    padding: 8px 0;
+h1 {
     color: #fff;
-
-    @include placeholder {
-        color: $light-green;
-    }
-
-    a i.back-button {
-        font-size: 3.75em;
-        color: #fff;
-    }
-    h1#detail-name {
-        font-weight: bold;
-    }
-
-    @media only screen and (min-width : 320px) {
-        h1#detail-name {
-            font-size: 1.5em;
-            margin: 0.25em 0 0 0;
-        }
-    }
-
-    @media only screen and (min-width : 768px) {
-        h1#detail-name {
-            font-size: 2.25em;
-            margin: .25em 0 0 .25em;
-        }
-    }
-
-    @include loading-icon();
 }
 
 .vue-map-container {
@@ -190,57 +24,34 @@ body {
     min-height: 500px;
 }
 
-.panel-result-preview {
-    @include box-shadow(4px, 4px, 4px, rgba(63, 146, 161, 0.5));
-    h3 {
-        color: $dark-green;
-        font-size: 1.125em;
-        font-weight: bold;
-        margin-top: 0.125em;
-    }
+.row.detail-row {
+    .panel {
+        @include box-shadow(4px, 4px, 4px, rgba(63, 146, 161, 0.5));
 
-    .row.quick-info {
-        margin: 10px 0 5px 0;
-        span {
-            color: $light-grey;
+        table.detail-list {
+            width: 100%;
+            margin: 0 auto;
+            font-size: 1.185em;
         }
 
-        .fa.fa-bolt {
-            color: $dark-green;
+        td {
+            padding: 3px 4px;
+            vertical-align: top;
+        }
+
+        tr:nth-child(even) {
+            background-color: $off-white-alt;
+        }
+
+        .panel-default {
+            @include box-shadow(4px, 4px, 4px, rgba(63, 146, 161, 0.25));
+            border: none;
         }
     }
-}
 
-.row.detail-row .panel {
-    @include box-shadow(4px, 4px, 4px, rgba(63, 146, 161, 0.5));
-
-    table.detail-list {
-        width: 100%;
-        margin: 0 auto;
-        font-size: 1.185em;
+    .panel-body {
+        min-height: 425px;
     }
-
-    td {
-        padding: 3px 4px;
-        vertical-align: top;
-    }
-
-    tr:nth-child(even) {
-        background-color: $off-white-alt;
-    }
-
-    .panel-default {
-        @include box-shadow(4px, 4px, 4px, rgba(63, 146, 161, 0.25));
-        border: none;
-    }
-}
-
-.row.detail-row .panel-body {
-    min-height: 425px;
-}
-
-h1 {
-    color: #fff;
 }
 
 button.btn#view-map,
@@ -257,11 +68,4 @@ button.btn.view-details {
 
 button.btn#view-map {
     margin: 3em 0;
-}
-
-.fade-enter-active, .fade-leave-active {
-    transition: opacity .5s
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
-    opacity: 0
 }

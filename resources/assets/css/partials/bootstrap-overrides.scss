@@ -1,0 +1,19 @@
+/* Bootstrap overrides */
+.panel,
+button.btn,
+.input-group-lg > .form-control,
+.input-group-lg > .input-group-addon,
+.input-group-lg > .input-group-btn > .btn {
+    @include border-radius(0);
+}
+
+button.btn:active,
+button.btn:active:focus {
+    background-color: $light-green;
+    color: $off-white;
+}
+
+.panel {
+    background-color: rgba(255, 255, 255, 0.95);
+    font-size: 1.025em;
+}
