@@ -1,3 +1,4 @@
+"use strict";
 require('./../css/app.scss');
 import Vue from 'vue';
 import * as VueGoogleMaps from 'vue2-google-maps';
@@ -14,7 +15,8 @@ Vue.use(VueGoogleMaps, {
 
 window.dataStore = {
     isLoading: true,
-    hasGeoLocation: false,
+    noLocation: false,
+    hasFatalError: false,
     noStationsFound: false,
     shouldShowResults: false,
     stationList: null,
@@ -56,8 +58,6 @@ window.app = new Vue({
                     content: value.location.street_address.line_1 + ' ' + value.location.street_address.city
                 });
             });
-
-            this.shouldShowResults = true;
         },
 
         fetchStationList (type, payload) {
@@ -65,6 +65,7 @@ window.app = new Vue({
             this.stationList = Axios.get('/' + type, {
                 params: payload
             }).then((response) => {
+                this.resetErrors();
                 if ('success' == response.data.status) {
                     //Populate the global station list
                     this.stationList = response.data.list;
@@ -76,35 +77,58 @@ window.app = new Vue({
                     //Initialize the map
                     this.initMap();
                     this.isLoading = false;
+                    this.shouldShowResults = true;
+                } else {
+                    this.showNoResultsFound();
                 }
-                //TODO - More error handling
-
             }).catch((error) => {
-                //TODO - Error handling
-
+                this.showFatalError();
             });
         },
 
         populateListByAddress (address) {
             this.fetchStationList('address', address);
-
         },
 
         populateListByCoords (coords) {
             return this.fetchStationList('coords', coords);
+        },
+
+        showNoLocationError () {
+            this.shouldShowResults = false;
+            this.noLocation = true;
+        },
+
+        showNoResultsFound () {
+            this.shouldShowResults = false;
+            this.noStationsFound = true;
+        },
+
+        showFatalError () {
+            this.shouldShowResults = false;
+            this.hasFatalError = true;
+        },
+
+        resetErrors () {
+            this.noLocation = false;
+            this.noStationsFound = false;
+            this.hasFatalError = false;
         }
     },
 
     mounted () {
-        this.getLocation()
-            .then((position) => {
-                this.populateListByCoords({
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
-                });
-            }).catch((error) => {
-            //TODO - Handle no geolocation
-
-        });
+        if ('geolocation' in navigator) {
+            this.getLocation()
+                .then((position) => {
+                    this.populateListByCoords({
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    });
+                }).catch((error) => {
+                this.showNoLocationError();
+            });
+        } else {
+            this.showNoLocationError();
+        }
     }
 });

@@ -47,9 +47,6 @@
             </div>
         </header>
         <div class="row-fluid" id="body">
-            <div v-show="noStationsFound" id="station-list-empty">
-                <h1>No Stations Found</h1>
-            </div>
             <transition name="fade">
                 <div class="col-xs-12 col-md-8 col-md-offset-2 text-center" v-if="shouldShowResults">
                     <gmap-map :center="location" :zoom="12">
@@ -58,11 +55,22 @@
                 </div>
             </transition>
             <transition name="fade">
-                <div class="row-fluid" id="station-list" v-if="shouldShowResults">
+                <div class="row-fluid" id="station-list">
                     <div class="col-xs-12 col-md-8 col-md-offset-2">
                         <div class="row">
-                            <div v-for="station in stationList">
+                            <div v-if="shouldShowResults" v-for="station in stationList">
                                 <station-preview :station="station"></station-preview>
+                            </div>
+                            <div v-show="noStationsFound" id="station-list-empty">
+                                <h1 class="text-center">No Charging Stations Found</h1>
+                            </div>
+                            <div v-show="noLocation">
+                                <h1 class="text-center">Unable to Obtain Geolocation</h1>
+                                <h2 class="text-center error-subhead">Please enter an address to search by.</h2>
+                            </div>
+                            <div v-show="hasFatalError">
+                                <h1 class="text-center">We're Sorry, An error has occurred. </h1>
+                                <h2 class="text-center error-subhead">Please try again or refresh the page.</h2>
                             </div>
                         </div>
                     </div>
