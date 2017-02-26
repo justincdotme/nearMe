@@ -21,7 +21,7 @@ let data = {
     location: {},
     center: {},
     markers: [],
-    address: '1234 Any St'
+    address: null
 };
 
 //TODO - Extract to file
@@ -151,11 +151,15 @@ window.app = new Vue({
                 params: payload
             }).then((response) => {
 
-                //Populate the global station list
-                this.stationList = response.data.list;
+                if ('success' == response.data.status) {
+                    //Populate the global station list
+                    this.stationList = response.data.list;
+                    this.address = response.data.address;
 
-                //Initialize the map
-                this.initMap();
+                    //Initialize the map
+                    this.initMap();
+                }
+                //TODO - More error handling
 
             }).catch((error) => {
                 //TODO - Error handling
