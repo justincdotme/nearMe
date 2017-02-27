@@ -23,7 +23,7 @@ window.dataStore = {
     stationList: null,
     location: {},
     markers: [],
-    address: null
+    address: null,
 };
 
 //Root Vue Instance
@@ -64,22 +64,27 @@ window.app = new Vue({
 
         fetchStationList (type, payload) {
             this.isLoading = true;
+            this.resetErrors();
             this.stationList = Axios.get('/' + type, {
                 params: payload
             }).then((response) => {
-                this.resetErrors();
-                if ('success' == response.data.status) {
-                    //Populate the global station list
-                    this.stationList = response.data.list;
-                    this.address = response.data.address;
-                    this.location = {
-                        lat: parseFloat(response.data.coords.lat),
-                        lng: parseFloat(response.data.coords.lng)
-                    };
-                    //Initialize the map
-                    this.initMap();
-                    this.isLoading = false;
-                    this.shouldShowResults = true;
+                let d = response.data;
+                if ('success' == d.status) {
+                    if (d.list.length) {
+                        //Populate the global station list
+                        this.stationList = response.data.list;
+                        this.address = response.data.address;
+                        this.location = {
+                            lat: parseFloat(response.data.coords.lat),
+                            lng: parseFloat(response.data.coords.lng)
+                        };
+                        //Initialize the map
+                        this.initMap();
+                        this.shouldShowResults = true;
+                        this.isLoading = false;
+                    } else {
+                        this.showNoResultsFound();
+                    }
                 } else {
                     this.showNoResultsFound();
                 }
@@ -97,16 +102,19 @@ window.app = new Vue({
         },
 
         showNoLocationError () {
+            this.isLoading = false;
             this.shouldShowResults = false;
             this.noLocation = true;
         },
 
         showNoResultsFound () {
+            this.isLoading = false;
             this.shouldShowResults = false;
             this.noStationsFound = true;
         },
 
         showFatalError () {
+            this.isLoading = false;
             this.shouldShowResults = false;
             this.hasFatalError = true;
         },
