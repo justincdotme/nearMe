@@ -8,7 +8,7 @@
 <style lang="scss">
     @import '../../css/partials/mixins.scss';
     h1#loading {
-    @include loading-icon();
+        @include loading-icon();
         margin-top: 3em;
     }
 </style>

@@ -50,25 +50,25 @@
     @import '../../css/partials/mixins.scss';
 
     .panel-result-preview {
-    @include box-shadow(4px, 4px, 4px, rgba(63, 146, 161, 0.5));
-    h3 {
-        color: $dark-green;
-        font-size: 1.125em;
-        font-weight: bold;
-        margin-top: 0.125em;
-    }
+        @include box-shadow(4px, 4px, 4px, rgba(63, 146, 161, 0.5));
+        h3 {
+            color: $dark-green;
+            font-size: 1.125em;
+            font-weight: bold;
+            margin-top: 0.125em;
+        }
 
-    .row.quick-info {
-        height: 42px;
-        margin: 10px 0 5px 0;
-    span {
-        color: $light-grey;
-    }
+        .row.quick-info {
+            height: 42px;
+            margin: 10px 0 5px 0;
+            span {
+                color: $light-grey;
+            }
 
-    .fa.fa-bolt {
-        color: $dark-green;
-    }
-    }
+            .fa.fa-bolt {
+                color: $dark-green;
+            }
+        }
     }
 </style>
 <script>
