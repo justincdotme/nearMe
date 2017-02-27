@@ -61,7 +61,12 @@
         ],
         methods: {
             updateLocation(place) {
-                this.shared.location.address = place.formatted_address;
+                if ('formatted_address' in place) {
+                    this.shared.location.address = place.formatted_address;
+                } else {
+                    this.shared.location.address = place.name;
+                }
+                this.addressSearch();
             },
 
             addressSearch() {
