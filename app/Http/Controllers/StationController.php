@@ -51,11 +51,7 @@ class StationController extends Controller
                 'status' => 'success',
                 'list' => $this->stationListService->getList(
                     $coords->get('lat'),
-                    $coords->get('lng'),
-                    [
-                        'maxresults' => env('OPEN_CHARGE_API_MAX_RESULTS'),
-                        'distance' => env('OPEN_CHARGE_API_SEARCH_RADIUS'),
-                    ]
+                    $coords->get('lng')
                 ),
                 'coords' => $coords,
                 'address' => request('address')
@@ -106,12 +102,7 @@ class StationController extends Controller
             'status' => 'success',
             'list' => $this->stationListService->getList(
                 $coords['lat'],
-                $coords['lng'],
-                [
-                    'maxresults' => env('OPEN_CHARGE_API_MAX_RESULTS'),
-                    'distance' => env('OPEN_CHARGE_API_SEARCH_RADIUS'),
-                ]
-
+                $coords['lng']
             ),
             'coords' => $coords,
             'address' => $this->locationService->byCoordinates($coords['lat'], $coords['lng'])->get('address')

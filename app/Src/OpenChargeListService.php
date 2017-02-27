@@ -24,7 +24,7 @@ class OpenChargeListService implements ChargeStationListInterface
      *
      * @return array
      */
-    public function getList($lat, $lng, $filters)
+    public function getList($lat, $lng, $filters = null)
     {
         //The array to return
         $filteredResults = [];
@@ -34,8 +34,8 @@ class OpenChargeListService implements ChargeStationListInterface
             ->latitude($lat)
             ->longitude($lng)
             ->filters([
-                'maxresults' => (null != $filters['maxresults'] ? $filters['maxresults'] : 10),
-                'distance' => (null != $filters['distance'] ? $filters['distance'] : 5)
+                'maxresults' => env('OPEN_CHARGE_API_MAX_RESULTS'),
+                'distance' => env('OPEN_CHARGE_API_SEARCH_RADIUS')
             ])
             ->get()
             ->each(function ($item, $key) use (&$filteredResults) {
