@@ -15,13 +15,15 @@
                     <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-12 col-md-offset-0">
                         <div class="row">
                             <div class="col-xs-4">
-                                <strong>Levels: </strong>
-                                <span v-for="level in station.location.connections.levels">
-                                            <span><i class="fa fa-bolt" aria-hidden="true"></i> {{ level.id }} </span>
+                                <i class="fa fa-bolt" aria-hidden="true"></i>
+                                <span v-for="(level, index) in station.location.connections.levels">
+                                            <span>
+                                               Level {{ level.id }}
+                                                {{ (index == (station.location.connections.levels.length - 1)) ? '' : ',' }}
+                                            </span>
                                         </span>
                             </div>
                             <div class="col-xs-4 text-center">
-                                <strong>Access: </strong>
                                 <i v-if="station.location.usage == 'Unknown'" class="fa fa-question-circle" aria-hidden="true"></i>
                                 <i v-else-if="station.location.usage == 'Public'" class="fa fa-unlock" aria-hidden="true"></i>
                                 <i v-else="station.location.usage == 'Unknown'" class="fa fa-lock" aria-hidden="true"></i>
@@ -37,7 +39,7 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-12">
-                        <button type="button" class="btn btn-default view-details" onclick="window.location.href = '/details'">View Details</button>
+                        <button type="button" class="btn btn-default view-details">View Details</button>
                     </div>
                 </div>
             </div>
