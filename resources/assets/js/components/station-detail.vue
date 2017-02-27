@@ -80,7 +80,7 @@
                                                     <td>Website</td>
                                                     <td>
                                                         <span v-if="'-' != getCurrentStation().operator.website">
-                                                        <a :href="getCurrentStation().operator.website">
+                                                        <a :href="getCurrentStation().operator.website" target="_BLANK">
                                                             {{ getCurrentStation().operator.website }}
                                                         </a>
                                                     </span>
@@ -121,7 +121,7 @@
                                                 <td>Website</td>
                                                 <td>
                                                     <span v-if="'-' != getCurrentStation().operator.website">
-                                                        <a :href="getCurrentStation().operator.website">
+                                                        <a :href="getCurrentStation().operator.website" target="_BLANK">
                                                             {{ getCurrentStation().operator.website }}
                                                         </a>
                                                     </span>
@@ -219,43 +219,49 @@
     @import '../../css/partials/mixins.scss';
     @import '../../css/partials/vue-transitions.scss';
     #station-detail {
-        .panel {
-        @include box-shadow(4px, 4px, 4px, rgba(63, 146, 161, 0.5));
+            .panel {
+            @include box-shadow(4px, 4px, 4px, rgba(63, 146, 161, 0.5));
+            overflow: hidden;
 
-        table.detail-list {
-            width: 100%;
-            margin: 0 auto;
-            font-size: 1.185em;
-        }
+            table.detail-list {
+                width: 100%;
+                margin: 1.2em auto;
+                font-size: 1.185em;
+            }
 
-        td {
-            padding: 3px 4px;
-            vertical-align: top;
-        }
+            td {
+                padding: 3px 4px;
+                vertical-align: top;
+            }
 
-        tr:nth-child(even) {
-            background-color: $off-white-alt;
-        }
+            tr:nth-child(even) {
+                background-color: $off-white-alt;
+            }
 
-        .panel-default {
-        @include box-shadow(4px, 4px, 4px, rgba(63, 146, 161, 0.25));
-            border: none;
-        }
-        }
+            .panel-default {
+                @include box-shadow(4px, 4px, 4px, rgba(63, 146, 161, 0.25));
+                border: none;
+            }
 
-        .panel-body {
-            min-height: 425px;
+            .panel-body {
+                min-height: 425px;
+
+                h2 {
+                    margin-top: 6px;
+                }
+            }
         }
 
         a.btn.view-map {
             border-radius: 0;
             background-color: $dark-green;
-            width: 48%;
+            width: 100%;
             font-weight: bold;
             font-size: 1.125em;
             border: none;
-            margin: 3em 0;
+            margin: 0.45em 0;
             color: #fff;
+            padding: 14px 0;
         }
     }
 </style>

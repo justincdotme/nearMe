@@ -51,6 +51,10 @@ window.nearMe.app = new Vue({
         LoadingIcon
     },
     methods: {
+        getCurrentStationName () {
+            return this.stations.list[this.stations.currentStation].location.name;
+        },
+
         getLocation () {
             return new Promise((resolve, reject) => {
                 navigator.geolocation.getCurrentPosition(

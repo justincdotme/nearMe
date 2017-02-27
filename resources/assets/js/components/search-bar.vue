@@ -20,7 +20,6 @@
                 <a @click="showStationList">
                     <i class="fa fa-arrow-circle-left back-button" aria-hidden="true"></i>
                 </a>
-                <h1 id="detail-name">{{ getStation() }}</h1>
             </div>
         </div>
     </div>
@@ -48,20 +47,6 @@
             font-weight: bold;
         }
 
-        @media only screen and (min-width : 320px) {
-            h1#detail-name {
-                font-size: 1.5em;
-                margin: 0.25em 0 0 0.5em;
-            }
-        }
-
-        @media only screen and (min-width : 768px) {
-            h1#detail-name {
-                font-size: 2.25em;
-                margin: .25em 0 0 1.25em;
-            }
-        }
-
     @include loading-icon();
     }
 </style>
@@ -71,9 +56,6 @@
 
         ],
         methods: {
-            getStation () {
-              return this.shared.stations.list[this.shared.stations.currentStation].location.name;
-            },
             showStationList () {
                 this.shared.stations.currentStation = null;
                 this.shared.state.shouldShowResults = true;
