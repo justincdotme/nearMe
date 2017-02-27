@@ -30,7 +30,6 @@
                                 <span>{{ station.location.usage }}</span>
                             </div>
                             <div class="col-xs-4 text-right">
-                                <strong>Distance: </strong>
                                 <i class="fa fa-map-marker" aria-hidden="true"></i>
                                 <span>{{ station.location.distance }} mi</span>
                             </div>
