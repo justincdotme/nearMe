@@ -80,10 +80,13 @@
                                                     <td>Website</td>
                                                     <td>
                                                         <span v-if="'-' != getCurrentStation().operator.website">
-                                                            <a :href="getCurrentStation().operator.website">
-                                                                {{ getCurrentStation().operator.website }}
-                                                            </a>
-                                                        </span>
+                                                        <a :href="getCurrentStation().operator.website">
+                                                            {{ getCurrentStation().operator.website }}
+                                                        </a>
+                                                    </span>
+                                                        <span v-else>
+                                                        -
+                                                    </span>
                                                     </td>
                                                 </tr>
                                                 <tr>
