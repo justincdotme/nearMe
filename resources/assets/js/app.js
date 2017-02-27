@@ -4,7 +4,8 @@ import Vue from 'vue';
 import * as VueGoogleMaps from 'vue2-google-maps';
 import Axios from 'axios';
 import SearchBar from './components/search-bar.vue';
-import StationPreview from './components/station-preview.vue';
+import StationPreviews from './components/station-previews.vue';
+import StationDetail from './components/station-detail.vue';
 import LoadingIcon from './components/loading-icon.vue';
 
 Vue.use(VueGoogleMaps, {
@@ -21,13 +22,16 @@ window.nearMe = {
             isLoading: true,
             noLocation: false,
             hasFatalError: false,
+            shouldShowMap: false,
             noStationsFound: false,
             shouldShowResults: false,
+            shouldShowStationDetail: false
         },
         stations: {
             markers: [],
             list: [],
-            currentStation: null
+            currentStation: null,
+            showDetails: false
         },
         location: {
             coords: null,
@@ -42,7 +46,8 @@ window.nearMe.app = new Vue({
     data: nearMe.dataStore,
     components: {
         SearchBar,
-        StationPreview,
+        StationPreviews,
+        StationDetail,
         LoadingIcon
     },
     methods: {
@@ -60,6 +65,8 @@ window.nearMe.app = new Vue({
         },
 
         addMapMarkers () {
+            //Empty current map markers
+            this.stations.markers = [];
             //Add the markers to the map
             this.stations.list.forEach((value, i) => {
                 this.stations.markers.push({
@@ -93,6 +100,7 @@ window.nearMe.app = new Vue({
                         this.addMapMarkers();
                         //Show the results
                         this.state.shouldShowResults = true;
+                        this.state.shouldShowMap = true;
                         //Reset the app loading state
                         this.state.isLoading = false;
                     } else {
@@ -123,6 +131,7 @@ window.nearMe.app = new Vue({
                     break;
                 case 'results':
                     this.state.noStationsFound = true;
+                    this.state.shouldShowMap = false;
                     break;
                 default:
                     this.state.hasFatalError = true;

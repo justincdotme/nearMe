@@ -48,20 +48,19 @@
         </header>
         <div class="row-fluid" id="body">
             <transition name="fade">
-                <div class="col-xs-12 col-md-8 col-md-offset-2 text-center" v-if="state.shouldShowResults">
+                <div class="col-xs-12 col-md-8 col-md-offset-2 text-center" v-if="state.shouldShowMap">
                     <gmap-map :center="location.coords" :zoom="12">
                         <gmap-marker v-for="m in stations.markers" :position="m.position"></gmap-marker>
                     </gmap-map>
                 </div>
             </transition>
+            <station-detail></station-detail>
             <transition name="fade">
-                <div class="row-fluid" id="station-list">
+                <div class="row-fluid">
                     <div class="col-xs-12 col-md-8 col-md-offset-2">
                         <div class="row">
                             <loading-icon></loading-icon>
-                            <div v-if="state.shouldShowResults" v-for="station in stations.list">
-                                <station-preview :station="station"></station-preview>
-                            </div>
+                            <station-previews></station-previews>
                             <div v-show="state.noStationsFound" id="station-list-empty">
                                 <h1 class="text-center">No Charging Stations Found</h1>
                             </div>

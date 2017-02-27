@@ -25,37 +25,7 @@ h2.error-subhead {
     min-height: 500px;
 }
 
-.row.detail-row {
-    .panel {
-        @include box-shadow(4px, 4px, 4px, rgba(63, 146, 161, 0.5));
 
-        table.detail-list {
-            width: 100%;
-            margin: 0 auto;
-            font-size: 1.185em;
-        }
-
-        td {
-            padding: 3px 4px;
-            vertical-align: top;
-        }
-
-        tr:nth-child(even) {
-            background-color: $off-white-alt;
-        }
-
-        .panel-default {
-            @include box-shadow(4px, 4px, 4px, rgba(63, 146, 161, 0.25));
-            border: none;
-        }
-    }
-
-    .panel-body {
-        min-height: 425px;
-    }
-}
-
-button.btn#view-map,
 button.btn.view-details {
     margin-top: 8px;
     width: 100%;
@@ -65,8 +35,4 @@ button.btn.view-details {
     font-weight: bold;
     font-size: 1.125em;
     border: none;
-}
-
-button.btn#view-map {
-    margin: 3em 0;
 }
