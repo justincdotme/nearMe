@@ -4,13 +4,13 @@
                 class="form-control"
                 id="gmap-auto"
                 placeholder="Address"
-                :value="shared.address"
+                :value="shared.location.address"
                 @place_changed="updateLocation"
         ></gmap-autocomplete>
         <span class="input-group-btn">
                 <button class="btn btn-default" id="search-button" type="button">
-                    <i class="fa fa-search" aria-hidden="true" v-show="!shared.isLoading" @click="addressSearch"></i>
-                    <i class="fa fa-spinner slow-spin" aria-hidden="true" v-show="shared.isLoading"></i>
+                    <i class="fa fa-search" aria-hidden="true" v-show="!shared.state.isLoading" @click="addressSearch"></i>
+                    <i class="fa fa-spinner slow-spin" aria-hidden="true" v-show="shared.state.isLoading"></i>
                 </button>
             </span>
     </div>
@@ -25,31 +25,31 @@
         color: #fff;
 
 
-    @include placeholder {
-        color: $light-green;
-    }
-
-    a i.back-button {
-        font-size: 3.75em;
-        color: #fff;
-    }
-    h1#detail-name {
-        font-weight: bold;
-    }
-
-    @media only screen and (min-width : 320px) {
-        h1#detail-name {
-            font-size: 1.5em;
-            margin: 0.25em 0 0 0;
+        @include placeholder {
+            color: $light-green;
         }
-    }
 
-    @media only screen and (min-width : 768px) {
-        h1#detail-name {
-            font-size: 2.25em;
-            margin: .25em 0 0 .25em;
+        a i.back-button {
+            font-size: 3.75em;
+            color: #fff;
         }
-    }
+        h1#detail-name {
+            font-weight: bold;
+        }
+
+        @media only screen and (min-width : 320px) {
+            h1#detail-name {
+                font-size: 1.5em;
+                margin: 0.25em 0 0 0;
+            }
+        }
+
+        @media only screen and (min-width : 768px) {
+            h1#detail-name {
+                font-size: 2.25em;
+                margin: .25em 0 0 .25em;
+            }
+        }
 
     @include loading-icon();
     }
@@ -61,13 +61,13 @@
         ],
         methods: {
             updateLocation(place) {
-                this.shared.address = place.formatted_address;
+                this.shared.location.address = place.formatted_address;
             },
 
             addressSearch() {
-                if (!this.shared.isLoading) {
-                    return app.populateListByAddress({
-                        address: this.shared.address
+                if (!this.shared.state.isLoading) {
+                    return nearMe.app.populateListByAddress({
+                        address: this.shared.location.address
                     });
                 }
             },
@@ -75,7 +75,7 @@
 
         data() {
             return {
-                shared: window.dataStore
+                shared: window.nearMe.dataStore
             };
         }
     }

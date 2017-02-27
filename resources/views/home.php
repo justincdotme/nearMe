@@ -48,9 +48,9 @@
         </header>
         <div class="row-fluid" id="body">
             <transition name="fade">
-                <div class="col-xs-12 col-md-8 col-md-offset-2 text-center" v-if="shouldShowResults">
-                    <gmap-map :center="location" :zoom="12">
-                        <gmap-marker v-for="m in markers" :position="m.position"></gmap-marker>
+                <div class="col-xs-12 col-md-8 col-md-offset-2 text-center" v-if="state.shouldShowResults">
+                    <gmap-map :center="location.coords" :zoom="12">
+                        <gmap-marker v-for="m in stations.markers" :position="m.position"></gmap-marker>
                     </gmap-map>
                 </div>
             </transition>
@@ -59,17 +59,17 @@
                     <div class="col-xs-12 col-md-8 col-md-offset-2">
                         <div class="row">
                             <loading-icon></loading-icon>
-                            <div v-if="shouldShowResults" v-for="station in stationList">
+                            <div v-if="state.shouldShowResults" v-for="station in stations.list">
                                 <station-preview :station="station"></station-preview>
                             </div>
-                            <div v-show="noStationsFound" id="station-list-empty">
+                            <div v-show="state.noStationsFound" id="station-list-empty">
                                 <h1 class="text-center">No Charging Stations Found</h1>
                             </div>
-                            <div v-show="noLocation">
+                            <div v-show="state.noLocation">
                                 <h1 class="text-center">Unable to Obtain Geolocation</h1>
                                 <h2 class="text-center error-subhead">Please enter an address to search by.</h2>
                             </div>
-                            <div v-show="hasFatalError">
+                            <div v-show="state.hasFatalError">
                                 <h1 class="text-center">We're Sorry, An error has occurred. </h1>
                                 <h2 class="text-center error-subhead">Please try again or refresh the page.</h2>
                             </div>

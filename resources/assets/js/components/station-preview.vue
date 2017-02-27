@@ -83,7 +83,7 @@
 
         data() {
             return {
-                shared: window.dataStore
+                shared: window.nearMe.dataStore
             };
         }
     }

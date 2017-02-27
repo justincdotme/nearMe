@@ -14,22 +14,32 @@ Vue.use(VueGoogleMaps, {
     },
 });
 
-window.dataStore = {
-    isLoading: true,
-    noLocation: false,
-    hasFatalError: false,
-    noStationsFound: false,
-    shouldShowResults: false,
-    stationList: null,
-    location: {},
-    markers: [],
-    address: null,
+//The shared data object
+window.nearMe = {
+    dataStore: {
+        state: {
+            isLoading: true,
+            noLocation: false,
+            hasFatalError: false,
+            noStationsFound: false,
+            shouldShowResults: false,
+        },
+        stations: {
+            markers: [],
+            list: [],
+            currentStation: null
+        },
+        location: {
+            coords: null,
+            address: null
+        }
+    }
 };
 
 //Root Vue Instance
-window.app = new Vue({
+window.nearMe.app = new Vue({
     el: '#app',
-    data: dataStore,
+    data: nearMe.dataStore,
     components: {
         SearchBar,
         StationPreview,
@@ -49,10 +59,10 @@ window.app = new Vue({
             });
         },
 
-        initMap () {
-            //Add the markers
-            this.stationList.forEach((value, i) => {
-                this.markers.push({
+        addMapMarkers () {
+            //Add the markers to the map
+            this.stations.list.forEach((value, i) => {
+                this.stations.markers.push({
                     position: {
                         lat: value.location.lat,
                         lng: value.location.lng,
@@ -63,33 +73,36 @@ window.app = new Vue({
         },
 
         fetchStationList (type, payload) {
-            this.isLoading = true;
+            this.state.isLoading = true;
             this.resetErrors();
-            this.stationList = Axios.get('/' + type, {
+            Axios.get('/' + type, {
                 params: payload
             }).then((response) => {
                 let d = response.data;
                 if ('success' == d.status) {
                     if (d.list.length) {
                         //Populate the global station list
-                        this.stationList = response.data.list;
-                        this.address = response.data.address;
-                        this.location = {
+                        this.stations.list = response.data.list;
+                        //Set the current address and coords
+                        this.location.address = response.data.address;
+                        this.location.coords = {
                             lat: parseFloat(response.data.coords.lat),
                             lng: parseFloat(response.data.coords.lng)
                         };
-                        //Initialize the map
-                        this.initMap();
-                        this.shouldShowResults = true;
-                        this.isLoading = false;
+                        //Add station markers to the map
+                        this.addMapMarkers();
+                        //Show the results
+                        this.state.shouldShowResults = true;
+                        //Reset the app loading state
+                        this.state.isLoading = false;
                     } else {
-                        this.showNoResultsFound();
+                        this.showError('results');
                     }
                 } else {
-                    this.showNoResultsFound();
+                    this.showError('results');
                 }
             }).catch((error) => {
-                this.showFatalError();
+                this.showError();
             });
         },
 
@@ -101,28 +114,25 @@ window.app = new Vue({
             return this.fetchStationList('coords', coords);
         },
 
-        showNoLocationError () {
-            this.isLoading = false;
-            this.shouldShowResults = false;
-            this.noLocation = true;
-        },
-
-        showNoResultsFound () {
-            this.isLoading = false;
-            this.shouldShowResults = false;
-            this.noStationsFound = true;
-        },
-
-        showFatalError () {
-            this.isLoading = false;
-            this.shouldShowResults = false;
-            this.hasFatalError = true;
+        showError(type) {
+            this.state.isLoading = false;
+            this.state.shouldShowResults = false;
+            switch (type) {
+                case 'location':
+                    this.state.noLocation = true;
+                    break;
+                case 'results':
+                    this.state.noStationsFound = true;
+                    break;
+                default:
+                    this.state.hasFatalError = true;
+            }
         },
 
         resetErrors () {
-            this.noLocation = false;
-            this.noStationsFound = false;
-            this.hasFatalError = false;
+            this.state.noLocation = false;
+            this.state.noStationsFound = false;
+            this.state.hasFatalError = false;
         }
     },
 
@@ -135,10 +145,10 @@ window.app = new Vue({
                         lng: position.coords.longitude
                     });
                 }).catch((error) => {
-                this.showNoLocationError();
+                this.showError('location');
             });
         } else {
-            this.showNoLocationError();
+            this.showError('location');
         }
     }
 });

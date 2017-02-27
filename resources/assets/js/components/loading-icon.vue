@@ -1,5 +1,5 @@
 <template>
-    <div v-if="shared.isLoading" id="loading-icon">
+    <div v-if="shared.state.isLoading" id="loading-icon">
         <h1 class="text-center" id="loading">
             Loading <i class="fa fa-spinner slow-spin" aria-hidden="true"></i>
         </h1>
@@ -21,7 +21,7 @@
 
         data() {
             return {
-                shared: window.dataStore
+                shared: window.nearMe.dataStore
             };
         }
     }
