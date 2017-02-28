@@ -48,11 +48,6 @@
         </header>
         <div class="row-fluid" id="body">
             <transition name="fade">
-                <h1 v-if="state.shouldShowStationDetail" id="detail-name" class="text-center">
-                    {{ getCurrentStationName() }}
-                </h1>
-            </transition>
-            <transition name="fade">
                 <div class="col-xs-12 col-md-8 col-md-offset-2 text-center" v-if="state.shouldShowMap">
                     <gmap-map :center="location.coords" :zoom="12">
                         <gmap-marker v-for="m in stations.markers" :position="m.position"></gmap-marker>

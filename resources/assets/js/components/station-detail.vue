@@ -4,6 +4,13 @@
             <div class="row-fluid">
                 <div class="col-xs-12 col-md-8 col-md-offset-2">
                     <div class="row">
+                        <div class="col-xs-12">
+                            <h1 id="detail-name" class="text-center">
+                                {{ getCurrentStation().location.name }}
+                            </h1>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div id="station-detail">
                             <div class="col-sm-6 col-lg-4">
                                 <div class="panel panel-default">
@@ -245,10 +252,6 @@
 
             .panel-body {
                 min-height: 425px;
-
-                h2 {
-                    margin-top: 6px;
-                }
             }
         }
 
@@ -263,6 +266,10 @@
             color: #fff;
             padding: 14px 0;
         }
+    }
+
+    h1#detail-name {
+        margin-top: 6px;
     }
 </style>
 <script>
