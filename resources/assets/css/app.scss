@@ -13,6 +13,16 @@ body {
     color: $dark-green;
 }
 
+#app header {
+    position: fixed;
+    z-index: 10;
+    width: 100%;
+}
+
+#app #body {
+    padding-top: 66px;
+}
+
 h1,
 h2.error-subhead {
     color: #fff;

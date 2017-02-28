@@ -51,6 +51,21 @@ window.nearMe.app = new Vue({
         LoadingIcon
     },
     methods: {
+        scrollToTop(duration, context) {
+            if (duration <= 0) { //Time is up!
+                return;
+            }
+            let perIterationMovement = ((0 - document.body.scrollTop) / duration * 10);
+
+            setTimeout(() => {
+                document.body.scrollTop = (document.body.scrollTop + perIterationMovement);
+                if (document.body.scrollTop === 0) { //We're at the top
+                    return;
+                }
+                context.scrollToTop(duration - 10, context);
+            }, 10);
+        },
+
         getLocation () {
             return new Promise((resolve, reject) => {
                 navigator.geolocation.getCurrentPosition(
@@ -100,9 +115,12 @@ window.nearMe.app = new Vue({
                         this.addMapMarkers();
                         //Show the results
                         this.state.shouldShowResults = true;
+                        //Show the map
                         this.state.shouldShowMap = true;
                         //Reset the app loading state
                         this.state.isLoading = false;
+                        //Scroll to the top of the page
+                        this.scrollToTop(300, this);
                     } else {
                         this.showError('results');
                     }
