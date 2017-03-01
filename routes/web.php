@@ -3,7 +3,8 @@
 $app->get('/', function () {
     return view('home')
         ->with([
-            'gMapApiKey' => env('GEOCODE_GOOGLE_APIKEY')
+            'gMapApiKey' => env('GEOCODE_GOOGLE_APIKEY'),
+            'gaCode' => env('GOOGLE_ANALYTICS')
         ]);
 });
 
