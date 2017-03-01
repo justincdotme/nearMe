@@ -22,12 +22,6 @@
     
     npm install
     
-            
-  Remove Google Analytics and Piwik Tracking
-  
-    Remove the Piwik and Google Analytics scripts from the bottom of home.blade.php (or add your own)
-    
-    Remove the gaCode view variable from routes/web.php (or add your own)
 
 ## Credits
 
