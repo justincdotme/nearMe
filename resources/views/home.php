@@ -47,6 +47,17 @@
             </div>
         </header>
         <div class="row-fluid" id="body">
+            <div v-show="state.noStationsFound" id="station-list-empty" class="error-message">
+                <h1 class="text-center">No Charging Stations Found</h1>
+            </div>
+            <div v-show="state.noLocation" class="error-message">
+                <h1 class="text-center">Unable to Obtain Geolocation</h1>
+                <h2 class="text-center error-subhead">Please enter an address to search by.</h2>
+            </div>
+            <div v-show="state.hasFatalError" class="error-message">
+                <h1 class="text-center">We're Sorry, An error has occurred. </h1>
+                <h2 class="text-center error-subhead">Please try again or refresh the page.</h2>
+            </div>
             <transition name="fade">
                 <div class="col-xs-12 col-md-8 col-md-offset-2 text-center" v-if="state.shouldShowMap">
                     <gmap-map :center="location.coords" :zoom="12">
@@ -61,17 +72,6 @@
                         <div class="row">
                             <loading-icon></loading-icon>
                             <station-previews></station-previews>
-                            <div v-show="state.noStationsFound" id="station-list-empty">
-                                <h1 class="text-center">No Charging Stations Found</h1>
-                            </div>
-                            <div v-show="state.noLocation">
-                                <h1 class="text-center">Unable to Obtain Geolocation</h1>
-                                <h2 class="text-center error-subhead">Please enter an address to search by.</h2>
-                            </div>
-                            <div v-show="state.hasFatalError">
-                                <h1 class="text-center">We're Sorry, An error has occurred. </h1>
-                                <h2 class="text-center error-subhead">Please try again or refresh the page.</h2>
-                            </div>
                         </div>
                     </div>
                 </div>
