@@ -81,6 +81,7 @@
 <script>
     window.googleMapsKey = "<?= $gMapApiKey; ?>";
 </script>
+<?php include 'partials/analytics.php'; ?>
 <script src="/assets/js/dist/vendor.js"></script>
 <script src="/assets/js/dist/app.js"></script>
 </body>
