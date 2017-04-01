@@ -75,6 +75,8 @@
                 color: $dark-green;
             }
         }
+
+        height: 228px;
     }
 </style>
 <script>
