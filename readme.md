@@ -1,3 +1,8 @@
+# This project is archived and no longer maintained.
+
+> The code and its dependency tree may contain unpatched security vulnerabilities. It is preserved for archival purposes only and should not be used in any environment. No issues, pull requests, or updates will be accepted.
+
+---
 # nearMe v1.0
   An application for finding nearby EV Charging Stations.  
   The application uses the HTML5 Geolocation API and the Open Charge Map API to determine the users location. 
